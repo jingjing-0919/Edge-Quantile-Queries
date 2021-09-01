@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f0954e60-23b5-4c6e-881c-ef3575e6a02a" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/IoT-quantile-queries" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1wIR0x1gUBLRka177arybq3z05H" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RunManager" selected="Application.single">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="CSQQ" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="simulator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="simulator" />
+      <module name="CSQQ" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="single" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="single" />
+      <module name="CSQQ" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.single" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.simulator" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f0954e60-23b5-4c6e-881c-ef3575e6a02a" name="Default Changelist" comment="" />
+      <created>1628143896466</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1628143896466</updated>
+      <workItem from="1628143899612" duration="6220000" />
+      <workItem from="1629184344037" duration="17652000" />
+      <workItem from="1629338111591" duration="35607000" />
+      <workItem from="1629767296288" duration="7022000" />
+      <workItem from="1629875190378" duration="3107000" />
+      <workItem from="1629977578887" duration="21077000" />
+      <workItem from="1630215404286" duration="8809000" />
+      <workItem from="1630312700635" duration="2059000" />
+      <workItem from="1630371190959" duration="2985000" />
+      <workItem from="1630411205936" duration="1275000" />
+      <workItem from="1630463114565" duration="626000" />
+      <workItem from="1630466084937" duration="475000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1557" height="249" key="GridCell.Tab.0.bottom" timestamp="1630237802658">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="249" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1630237802658" />
+    <state width="1557" height="249" key="GridCell.Tab.0.center" timestamp="1630237802658">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="249" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1630237802658" />
+    <state width="1557" height="249" key="GridCell.Tab.0.left" timestamp="1630237802658">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="249" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1630237802658" />
+    <state width="1557" height="249" key="GridCell.Tab.0.right" timestamp="1630237802658">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="249" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1630237802658" />
+    <state width="1557" height="249" key="GridCell.Tab.1.bottom" timestamp="1630237802658">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="249" key="GridCell.Tab.1.bottom/0.0.1600.860@0.0.1600.860" timestamp="1630237802658" />
+    <state width="1557" height="249" key="GridCell.Tab.1.center" timestamp="1630237802658">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="249" key="GridCell.Tab.1.center/0.0.1600.860@0.0.1600.860" timestamp="1630237802658" />
+    <state width="1557" height="249" key="GridCell.Tab.1.left" timestamp="1630237802658">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="249" key="GridCell.Tab.1.left/0.0.1600.860@0.0.1600.860" timestamp="1630237802658" />
+    <state width="1557" height="249" key="GridCell.Tab.1.right" timestamp="1630237802658">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="249" key="GridCell.Tab.1.right/0.0.1600.860@0.0.1600.860" timestamp="1630237802658" />
+    <state x="301" y="72" key="SettingsEditor" timestamp="1630466125852">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="301" y="72" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1630466125852" />
+    <state x="480" y="254" key="com.intellij.ide.util.TipDialog" timestamp="1630466107014">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="480" y="254" key="com.intellij.ide.util.TipDialog/0.0.1600.860@0.0.1600.860" timestamp="1630466107014" />
+  </component>
+</project>
