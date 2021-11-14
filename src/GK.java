@@ -16,18 +16,22 @@ public class GK {
     public static ArrayList<Integer> quantile(double phi, int n, ArrayList<Tuple> s, double e) {
 
         ArrayList<Integer> quantile = new ArrayList<Integer>(1);
-
+        int index = 1;
         double en = e * n;
-        int r = (int) Math.ceil(phi * (n - 1));
-
+        int r0 = (int) Math.ceil((e/2) * (n - 1));
+        int upper = (int) Math.ceil(2.0 / e);
+        int r = r0;
         int rmin = 0, rmax;
         for (Tuple t : s) {
             rmin += t.getG();
             rmax = rmin + t.getD();
-            if (r - rmin <= en && rmax - r <= en) {
+            if (r - rmin <= en && rmax - r <= en && index < upper) {
                 quantile.add(t.getVal());
+                r = r + r0;
+                index++;
             }
         }
+        quantile.add(s.get(s.size()-1).getVal());
         return quantile;
     }
 
@@ -52,6 +56,11 @@ public class GK {
 
         // inserts new tuple to summary s
         s.add(i, new Tuple(v, 1, delta));
+
+    }
+
+    private static int getPosition(ArrayList<Tuple> s, int v){
+        return 1;
 
     }
 

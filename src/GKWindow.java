@@ -12,7 +12,8 @@ public class GKWindow {
             w_min = w_max - w + 1;
         }
 
-        int block_size = (int) (w*e/2);
+        //int block_size = (int) (w*e/2);
+        int block_size = w;
 
         // checks whether its time to create another block
         if (n % block_size == 0) {
@@ -34,6 +35,8 @@ public class GKWindow {
 
     public static ArrayList<Integer> quantile(double phi, int w, double e, ArrayList<Block> blist) {
 
+
+
         ArrayList<Tuple> summary = blist.get(0).summary();
 
         for (int i = 1; i < blist.size(); i++) {
@@ -42,9 +45,7 @@ public class GKWindow {
 
         }
 
-        ArrayList<Integer> quantiles = GK.quantile(phi, w, summary, e);
-
-        return quantiles;
+        return GK.quantile(phi, w, summary, e);
     }
 
     public static ArrayList<Tuple> merge(ArrayList<Tuple> s1, ArrayList<Tuple> s2) {

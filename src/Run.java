@@ -3,8 +3,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Run {
-    public static void run (BaseStation baseStation,int size, int T, int delta_t,String csvFile,double phi,int start_time,double percent,int bound) throws IOException {
-        BufferedWriter bw = new BufferedWriter(new FileWriter("SingleQueryTestResult.txt",true));
+    public static int[] run (BaseStation baseStation,int size,String csvFile,double phi,int start_time,double percent,int bound,int type,double upper) throws IOException {
+        Runtime r =  Runtime.getRuntime();
+        r.gc();
+        long start_total = r.totalMemory();
+        long start_free = r.freeMemory();
+        BufferedWriter bw = new BufferedWriter(new FileWriter("FinalSingleTestResult.txt",true));
 
         /* Greenwald-Khanna test case
          *
@@ -80,6 +84,7 @@ public class Run {
 
 
         int n = 0;//当前summary个数
+        size = size - size % 100;
         int n_delay = 0;
         int size_delay = size * baseStation.getDelayPer100() / 100;
         int blocks = (int) Math.floor(2/e);
@@ -126,6 +131,7 @@ public class Run {
                 }
             }
         }
+
         long start = System.currentTimeMillis();
         if (baseStation.getDelayPer100() == 0){
             while (n < size){
@@ -144,21 +150,39 @@ public class Run {
                 }
             }
         }
-//        ArrayList<Integer> quantile = GKWindow.quantile(phi, n, e, blist);
+        ArrayList<Integer> quantile = GKWindow.quantile(phi, n, e, blist);
 //        for (Integer q : quantile) {
 //            System.out.print(q + "   ");
 //        }
         long end = System.currentTimeMillis();
+        long end_total = r.totalMemory();
+        long end_free = r.freeMemory();
+        long mem = ((end_total- end_free) - (start_total - start_free))/1024/1024;
+        System.out.println(mem) ;
 
-        System.out.println("");
 
-        System.out.println(end - start);
         bw.write("\r\n");
+        bw.write(csvFile+"  ");
+        if (type == 1){
+            bw.write("EBR:  id: "+ baseStation.getId());
+        }
+        else if (type == 2){
+            bw.write("EPS:  id: "+ baseStation.getId());
+        }
+        else if (type == 3){
+            bw.write("UTC：  id: "+ baseStation.getId());
+        }
+        else if (type == 4){
+            bw.write("RAN:  id: "+ baseStation.getId());
+        }
+        else if (type == 5){
+            bw.write("OEP:  id: "+baseStation.getId());
+        }
         if (bound == 0){
-            bw.write("dataSize : "+size + " , 占比："+percent+ " , e = "+e+" ,耗时 "+ (end - start)+ " ms" + ",  达到dataUpperBound");
+            bw.write(" ,dataSize : "+size + " , 占比："+percent+" ,上限：  "+ upper+ " , e = "+e+" ,耗时 "+ (end - start)+ " ms" + ",  达到dataUpperBound");
         }
         else {
-            bw.write("dataSize : "+size + " , 占比："+percent+ " , e = "+e+" ,耗时 "+ (end - start)+ " ms");
+            bw.write(" ,dataSize : "+size + " , 占比："+percent+" ,上限：  "+ upper+ " , e = "+e+" ,耗时 "+ (end - start)+ " ms");
         }
 
         bw.close();
@@ -199,5 +223,9 @@ public class Run {
 //        }
 //        bw.write("\r\n");
 //        bw.close();
+        int []res = new int[2];
+        res[0] = (int) (end-start);
+        res[1] = (int) mem;
+        return res;
     }
 }

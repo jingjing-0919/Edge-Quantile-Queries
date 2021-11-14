@@ -2,18 +2,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Main {//singleQuery Single BaseStation
-    public static double e = 0.001;//错误率
-    public static double phi = 0.5;//分位数
-    public static int delta_t = 200;//ms
-    public static int T = 1000;//ms
-    public static int size = 10000000;
-    public static String csvFile = "test10000000.txt";
-
-
-    public static void main(String[] args) throws IOException {
-
-        BufferedWriter bw = new BufferedWriter(new FileWriter("testResult1.txt", true));
+public class RunWithReturn {
+    public static ArrayList<Integer> run (Grid grid,BaseStation baseStation,int size,String csvFile,double phi,int start_time) throws IOException {
+        BufferedWriter bw = new BufferedWriter(new FileWriter("MultipleQueryTestResult1.txt",true));
 
         /* Greenwald-Khanna test case
          *
@@ -85,68 +76,114 @@ public class Main {//singleQuery Single BaseStation
 		 */
 
         /* ========================================================================= */
+        double e = baseStation.getE();
 
 
         int n = 0;//当前summary个数
-        int blocks = (int) Math.floor(2 / e);
+        size = size - size % 100;
+        int n_delay = 0;
+        int size_delay = size * baseStation.getDelayPer100() / 100;
+        //int blocks = (int) Math.floor(2/e);
+        int blocks = 1;
 
         ArrayList<Block> blist = new ArrayList<Block>(blocks);
+        ArrayList<Block> blist_delay = new ArrayList<>(blocks);
 
         //int[] observations = { 12, 10, 11, 10, 1, 10, 11, 9, 6, 7, 8, 11, 4, 5, 2, 3, 13, 19, 14, 15, 12, 16, 18, 17, 11, 1, 7, 13, 9, 10, 4, 8 };
         ArrayList<Integer> observations = new ArrayList<Integer>();
-        Random r = new Random();
-        int low = 1, high = 10000000;
+//        Random r = new Random();
+//        int low = 1, high = 10000000;
 
 
         //-------------------------------------------------------------------------------------------------------------------
-        int[] arr_data = new int[size + 2];
-        long[] arr_time = new long[size + 2];
+        int[] arr_data = new int[size+2];
+        long[] arr_time = new long [size+2];
         int temp = 0;
 
 
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";
+        int count = 0;
         try {
             br = new BufferedReader(new FileReader(csvFile));
             while ((line = br.readLine()) != null) {
                 // use comma as separator
-                String[] country = line.split(cvsSplitBy);
-                arr_data[temp] = Integer.parseInt(country[0]);
-                arr_time[temp] = Long.parseLong(country[3]);
-                temp++;
+                if (start_time <= count && count < start_time + size ){
+                    String[] country = line.split(cvsSplitBy);
+                    arr_data[temp] = Integer.parseInt(country[0]);
+                    arr_time[temp] = Long.parseLong(country[3]);
+                    temp++;
+                }
+                count++;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
         } finally {
             if (br != null) {
                 try {
                     br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (IOException e2) {
+                    e2.printStackTrace();
                 }
             }
         }
-        long start = System.currentTimeMillis();
 
-        while (n < size) {
-            GKWindow.greenwald_khanna_window(n, arr_data[n], size, e, blist);
-            n++;
+        long start = System.currentTimeMillis();
+        if (baseStation.getDelayPer100() == 0){
+            while (n < size){
+                GKWindow.greenwald_khanna_window(n, arr_data[n], size, e, blist);
+                n++;
+            }
+        }
+        else {
+            while (n < size) {
+                for (int i =0;i <100;i++){
+                    GKWindow.greenwald_khanna_window(n, arr_data[n], size, e, blist);
+                    n++;
+                }
+                for (int i = 0; i < baseStation.getDelayPer100();i++){
+                    GKWindow.greenwald_khanna_window(n_delay,arr_data[n_delay],size_delay,e,blist_delay);
+                }
+            }
         }
         long end = System.currentTimeMillis();
+
         ArrayList<Integer> quantile = GKWindow.quantile(phi, n, e, blist);
-        for (Integer q : quantile) {
-            System.out.print(q + "   ");
-        }
-        System.out.println("");
+//        for (Integer q : quantile) {
+//            System.out.print(q + "   ");
+//        }
 
-        System.out.println(end - start);
-        bw.write("\r\n");
-        bw.write("dataSize : "+size+" , e = "+e+" ,耗时 "+ (end - start)+ " ms");
+
+
+
+        bw.write("\n");
+        bw.write("BaseStation id: "+ baseStation.getId()+"\n");
+        bw.write("dataSize: "+size+ "\n");
+        bw.write("GK  cost: "+ (end - start) + "ms"+ " error: "+ e + "\n");
+//        if (type == 1){
+//            bw.write("EBR:  id: "+ baseStation.getId());
+//        }
+//        else if (type == 2){
+//            bw.write("EPS:  id: "+ baseStation.getId());
+//        }
+//        else if (type == 3){
+//            bw.write("UTC：  id: "+ baseStation.getId());
+//        }
+//        else if (type == 4){
+//            bw.write("RAN:  id: "+ baseStation.getId());
+//        }
+//        else if (type == 5){
+//            bw.write("OEP:  id: "+baseStation.getId());
+//        }
+//        if (bound == 0){
+//            bw.write(" ,dataSize : "+size + " , e = "+e+" ,耗时 "+ (end - start)+ " ms" );
+//        }
+//        else {
+//            bw.write(" ,dataSize : "+size + " , 占比："+percent+" ,上限：  "+ upper+ " , e = "+e+" ,耗时 "+ (end - start)+ " ms");
+//        }
+
         bw.close();
-
-
-
 //        bw.write("test data from :"+csvFile);
 //        bw.write(", 错误率 e ="+e);
 //        bw.write(", 窗口周期 delta_T = "+ delta_t);
@@ -154,7 +191,7 @@ public class Main {//singleQuery Single BaseStation
 //        long baseTime = System.currentTimeMillis();
 //        long curTime = System.currentTimeMillis() - baseTime;
 //        long  delay = baseTime;
-//
+
 //        for (int j = 0;j < (int)T/delta_t;j++){
 //            while ( arr_time[n] <= delta_t * (j+1) && n < size){
 //                if (arr_time[n] <= curTime){
@@ -164,13 +201,11 @@ public class Main {//singleQuery Single BaseStation
 //                }
 //                curTime = System.currentTimeMillis() - baseTime;
 //            }
+//
 //            ArrayList<Integer> quantile = GKWindow.quantile(phi, n, e, blist);
-//           for (Integer q : quantile) {
-//                System.out.print(q+ "   ");
-//            }
-//
-//
-//
+////            for (Integer q : quantile) {
+////                System.out.print(q+ "   ");
+////            }
 //            long long2 = System.currentTimeMillis();
 //            if (long2-baseTime- delta_t * j <= 200){
 //                bw.write("第 "+(j+1)+" 个时间窗口 ，耗时 "+200+"ms , ");
@@ -186,90 +221,7 @@ public class Main {//singleQuery Single BaseStation
 //        }
 //        bw.write("\r\n");
 //        bw.close();
-
-//            PrintWriter pw = null;
-//        try {
-//            pw = new PrintWriter("obs.txt");
-//            for (int i = 1; i <= size; i++) {
-//                int val = r.nextInt(high-low)+low;
-//                observations.add(val);
-//                pw.println(val);
-//            }
-//        } catch(Exception err) {
-//            err.printStackTrace();
-//        } finally {
-//            pw.close();
-//        }
-
-
-//        for (Integer obs : observations) {
-//            GKWindow.greenwald_khanna_window(n, obs, size, e, blist);
-//            n++;
-//        }
-
-        //      ArrayList<Tuple> summary = blist.get(0).summary();
-
-
-//		int rmin = 0, rmax;
-//        for (Tuple t : summary) {
-//			rmin += t.getG();
-//			rmax = rmin + t.getD();
-        //          System.out.println(t.toString());
-//			System.out.println("("+t.getVal()+", "+rmin+", "+rmax+")");
-        //      }
-
-        //       for (int i = 1; i < blist.size(); i++) {
-
-        //          System.out.println("");
-
-//			rmin = 0;			
-        //     for (Tuple t : blist.get(i).summary()) {
-//				rmin += t.getG();
-//				rmax = rmin + t.getD();
-        //        System.out.println(t.toString());
-//				System.out.println("("+t.getVal()+", "+rmin+", "+rmax+")");
-        //    }
-
-        //          summary = GKWindow.merge(summary, blist.get(i).summary());
-        //      }
-
-        //System.out.println("");
-
-        //      for (Tuple t : summary) {
-        //       System.out.println(t.toString());
-//			System.out.println("("+t.getVal()+", "+t.getRmin()+", "+t.getRmax()+")");
-        //       }
-
-        // System.out.println("");
-
-
-        // ====
-
-
-//        System.out.println("");
-//
-//        ArrayList<Tuple> s = new ArrayList<Tuple>();
-//        n = 0;
-//        for (Integer obs : observations) {
-//            GK.greenwald_khanna(n, obs, s, e);
-//            n++;
-//        }
-//
-////		rmin = 0;
-//        for (Tuple t : s) {
-////			rmin += t.getG();
-////			rmax = rmin + t.getD();
-//            System.out.println(t.toString());
-////			System.out.println("("+t.getVal()+", "+rmin+", "+rmax+")");
-//        }
-//
-//        ArrayList<Integer> quant = GK.quantile(0.5, n, s, e);
-//
-//        System.out.println("");
-//
-//
-//        for (Integer q : quant) {
-//            System.out.println(q);
-//        }
+        quantile.add((int) (end-start));
+        return quantile;
     }
 }
