@@ -1,12 +1,12 @@
 import java.io.*;
 import java.util.*;
 
-public class FinalTestSingle {//todo:1.  50 - 100w/s 数据 1km^km  2. delta_t = 1s  3.  delay 需要有累计  4. 按error relax
+public class FinalTestSingle {
 
 
-    public static int Grid_length = 1000;//默认正方形
-    public static int x_length = 5000;//应该为网格边长整数倍
-    public static int y_length = 5000;//应该为网格边长整数倍
+    public static int Grid_length = 1000;//square
+    public static int x_length = 5000;
+    public static int y_length = 5000;
     public static int [][] result;
 
 
@@ -47,9 +47,10 @@ public class FinalTestSingle {//todo:1.  50 - 100w/s 数据 1km^km  2. delta_t =
         }
 
 
-        //初始化Query
+        //initial
+        // Query
         ArrayList<Query> queries = new ArrayList<>();
-        csvFile = "data/Query60_txt";
+        csvFile = "data/Query50_txt";
         br = null;
         try {
             br = new BufferedReader(new FileReader(csvFile));
@@ -81,7 +82,7 @@ public class FinalTestSingle {//todo:1.  50 - 100w/s 数据 1km^km  2. delta_t =
                 }
             }
         }
-        //初始化所有Grids
+        //initial Grids
         int numberOfGrid_x = x_length / Grid_length;
         int numberOfGrid_y = y_length / Grid_length;
         ArrayList<Grid> grids = new ArrayList<>();
@@ -95,7 +96,7 @@ public class FinalTestSingle {//todo:1.  50 - 100w/s 数据 1km^km  2. delta_t =
             }
         }
 
-        //对所有相关的Grid找到相应的BaseStations
+        //find all relative BaseStations for  grids
         for (Query query:queries) {
             for (BaseStation baseStation : baseStations) {
                 if (calculate(query, baseStation)) {
@@ -104,7 +105,7 @@ public class FinalTestSingle {//todo:1.  50 - 100w/s 数据 1km^km  2. delta_t =
             }
         }
 
-        //对每个query 维护 IG 和 EG
+        //find Covered Cells and Intersecting Cells for queries
 
         for (Grid grid : grids) {
             for (Query query : queries) {
@@ -117,22 +118,22 @@ public class FinalTestSingle {//todo:1.  50 - 100w/s 数据 1km^km  2. delta_t =
                 }
             }
         }
-        //对每个Grid进行采样，得到数据量
+        //Set the default dataVolume
 
 
         for (Grid grid:grids){
-            grid.dataVolume = 400000;
+            grid.dataVolume = 1000000;
         }
 
         for (Grid grid : grids) {
             grid.minError = calculateMiniError(grid);
             grid.error = grid.minError;
         }
-        // 对IG进行EXCLUDE和INCLUDE判断
+        // choose to include or exclude Intersecting Cells
         for (Query query:queries){
-            checkIG(query);//todo： 重写一下calculateError
+            checkIG(query);
         }
-        // 对每个Query去检测它的ErrorBound是否在每个grid的error设为最小时被满足
+        // check whether one query can satisfy or not by calculate the error of current state
 
         CalculateError(queries);
         int sum = 0;
@@ -165,7 +166,7 @@ public class FinalTestSingle {//todo:1.  50 - 100w/s 数据 1km^km  2. delta_t =
 
 
 
-    public static void CalculateError(ArrayList<Query>checkList){//在每次进行distribute之后，计算当前Grid涉及的queries的错误率,检查是否超过errorBound
+    public static void CalculateError(ArrayList<Query>checkList){
         for (Query cur : checkList) {
             int temp_N = 0;
             double temp_e = 0;

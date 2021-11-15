@@ -2,13 +2,13 @@ import java.io.*;
 import java.text.DecimalFormat;
 import java.util.*;
 
-public class MultipleQuery2 {//todo:1.  50 - 100w/s 数据 1km^km  2. delta_t = 1s  3.  delay 需要有累计  4. 按error relax  
+public class MultipleQuery2 {
 
     public static String Query_txt;
     public static String BaseStations_txt;
-    public static int Grid_length = 1000;//默认正方形
-    public static int x_length = 5000;//应该为网格边长整数倍
-    public static int y_length = 5000;//应该为网格边长整数倍
+    public static int Grid_length = 1000;//square default
+    public static int x_length = 5000;
+    public static int y_length = 5000;
     public static int [][] result;
     public static boolean fail = false;
 
@@ -53,7 +53,7 @@ public class MultipleQuery2 {//todo:1.  50 - 100w/s 数据 1km^km  2. delta_t = 
         }
 
 
-        //初始化Query
+        //initial Query
         ArrayList<Query> queries = new ArrayList<>();
         csvFile = "data/Query50_txt";
         br = null;
@@ -87,7 +87,7 @@ public class MultipleQuery2 {//todo:1.  50 - 100w/s 数据 1km^km  2. delta_t = 
                 }
             }
         }
-        //初始化所有Grids
+        //initial Grids
         int numberOfGrid_x = x_length / Grid_length;
         int numberOfGrid_y = y_length / Grid_length;
         ArrayList<Grid> grids = new ArrayList<>();
@@ -101,7 +101,7 @@ public class MultipleQuery2 {//todo:1.  50 - 100w/s 数据 1km^km  2. delta_t = 
             }
         }
 
-        //对所有相关的Grid找到相应的BaseStations
+        //find all relative BaseStations for  grids
         for (Grid grid : grids) {
             for (BaseStation baseStation : baseStations) {
                 if (calculate(grid, baseStation)) {
@@ -110,7 +110,7 @@ public class MultipleQuery2 {//todo:1.  50 - 100w/s 数据 1km^km  2. delta_t = 
             }
         }
 
-        //对每个query 维护 IG 和 EG
+        //find Covered Cells and Intersecting Cells for queries
 
         for (Grid grid : grids) {
             for (Query query : queries) {
@@ -123,25 +123,24 @@ public class MultipleQuery2 {//todo:1.  50 - 100w/s 数据 1km^km  2. delta_t = 
                 }
             }
         }
-        //对每个Grid进行采样，得到数据量
-
+        //Set the default dataVolume to 1000000
 
         for (Grid grid:grids){
-            grid.dataVolume = 400000;
+            grid.dataVolume = 1000000;
         }
         
 
-        //计算每个Grid的最低错误率,并设为当前错误率
+        //calculate the minimal error of one grid
 
         for (Grid grid : grids) {
             grid.minError = calculateMiniError(grid);
             grid.error = grid.minError;
         }
-        // 对IG进行EXCLUDE和INCLUDE判断
+        // choose to include or exclude Intersecting Cells
         for (Query query:queries){
-            checkIG(query);//todo： 重写一下calculateError
+            checkIG(query);
         }
-        // 对每个Query去检测它的ErrorBound是否在每个grid的error设为最小时被满足
+        // check whether one query can satisfy or not by calculate the error of current state
 
         CalculateError(queries);
 
@@ -151,7 +150,7 @@ public class MultipleQuery2 {//todo:1.  50 - 100w/s 数据 1km^km  2. delta_t = 
           }
         }
 
-        //从每个Grid的set中删除fail的query
+        //delete failed query
 
         for (Grid grid:grids){
             ArrayList<Query> temp = grid.set;
@@ -163,18 +162,18 @@ public class MultipleQuery2 {//todo:1.  50 - 100w/s 数据 1km^km  2. delta_t = 
         }
         long start = System.currentTimeMillis();
 
-        //调用Calculate方法，计算在最小errorBound下每个Grid的延迟
+        //Calculate the delay of each grid under the miniErrorBound
         for (Grid grid:grids){
              Calculate(grid.minError,grid);
         }
-        //计算此时每个query的error和dataSize
+        //calculate the query error and dataSize
         CalculateError(queries);
-        //进入循环过程，调用checkBottleneck方法，进行标记
+
+        // start to relaxing
         boolean flag = true;
         int count1 = 0;
 
-
-        while (flag && count1 < 50){//逐步relax每个bottleneck的ErrorBound,使延迟趋向均衡
+        while (flag && count1 < 50){//relax every bottleneck's ErrorBound, let the delay balance
             CalculateError(queries);
             Grid bottleneck = checkBottleneck1(grids);
             int id = bottleneck.getId();
@@ -288,7 +287,7 @@ public class MultipleQuery2 {//todo:1.  50 - 100w/s 数据 1km^km  2. delta_t = 
         return quantile;
     }
 
-    public static Grid checkBottleneck1(ArrayList<Grid> grids){//在每次循环中对每个query标记当前的bottleneck,并返回一个ArrayList<Grid>
+    public static Grid checkBottleneck1(ArrayList<Grid> grids){
         Grid bottleneck = grids.get(0);
         for (Grid grid : grids) {
             if (bottleneck.delay < grid.delay && grid.set.size() != 0) {
@@ -301,7 +300,7 @@ public class MultipleQuery2 {//todo:1.  50 - 100w/s 数据 1km^km  2. delta_t = 
 
 
 
-    public static Grid checkBottleneck(ArrayList<Grid> grids,ArrayList<Query>queries){//在每次循环中对每个query标记当前的bottleneck,并返回一个ArrayList<Grid>
+    public static Grid checkBottleneck(ArrayList<Grid> grids,ArrayList<Query>queries){
         int []cnt = new int[grids.size()];
         for (Query query : queries) {
             for (int j = 0; j < query.covered.size(); j++) {
@@ -327,7 +326,7 @@ public class MultipleQuery2 {//todo:1.  50 - 100w/s 数据 1km^km  2. delta_t = 
 
 
 
-    public static void Calculate(double errorBound,Grid grid){//对给定errorBound进行数据分配，尽量使延迟最小
+    public static void Calculate(double errorBound,Grid grid){//distribute the data under the given errorBound
         grid.yita.clear();
         double [] upper = new double[grid.arr.size()];
         ArrayList<BaseStation> arr = grid.arr;
@@ -387,7 +386,7 @@ public class MultipleQuery2 {//todo:1.  50 - 100w/s 数据 1km^km  2. delta_t = 
         }
     }
 
-    public static boolean distribute(double delay,Grid grid){//对给定delay进行数据分配，尽量使错误最小
+    public static boolean distribute(double delay,Grid grid){
         grid.arr.sort(Comparator.comparingDouble(BaseStation::getE));
         HashMap<BaseStation,Double> yita = new HashMap<>();
         double data = grid.dataVolume;
@@ -440,7 +439,7 @@ public class MultipleQuery2 {//todo:1.  50 - 100w/s 数据 1km^km  2. delta_t = 
 
 
 
-    public static void CalculateError(ArrayList<Query>checkList){//在每次进行distribute之后，计算当前Grid涉及的queries的错误率,检查是否超过errorBound
+    public static void CalculateError(ArrayList<Query>checkList){
         for (Query cur : checkList) {
             int temp_N = 0;
             double temp_e = 0;
