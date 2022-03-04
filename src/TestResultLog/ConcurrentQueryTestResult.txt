@@ -1,0 +1,1253 @@
+Time cost of dataRedistribution: 90 ms
+ 
+
+GridID: 0
+Query.BaseStation id: 1
+dataSize: 1000000
+GK  cost: 1825ms error: 0.05
+ 
+
+GridID: 1
+Query.BaseStation id: 2
+dataSize: 1000000
+GK  cost: 880ms error: 0.04
+ 
+
+GridID: 2
+Query.BaseStation id: 3
+dataSize: 1000000
+GK  cost: 331ms error: 0.02
+ 
+
+GridID: 3
+Query.BaseStation id: 4
+dataSize: 1000000
+GK  cost: 290ms error: 0.01
+ 
+
+GridID: 4
+Query.BaseStation id: 4
+dataSize: 1000000
+GK  cost: 300ms error: 0.01
+ 
+
+GridID: 5
+Query.BaseStation id: 1
+dataSize: 500000
+GK  cost: 248ms error: 0.05
+
+Query.BaseStation id: 5
+dataSize: 500000
+GK  cost: 230ms error: 0.05
+ 
+
+GridID: 6
+Query.BaseStation id: 1
+dataSize: 60000
+GK  cost: 20ms error: 0.05
+
+Query.BaseStation id: 2
+dataSize: 80000
+GK  cost: 30ms error: 0.04
+
+Query.BaseStation id: 5
+dataSize: 60000
+GK  cost: 30ms error: 0.05
+
+Query.BaseStation id: 6
+dataSize: 800000
+GK  cost: 368ms error: 0.004
+ 
+
+GridID: 7
+Query.BaseStation id: 2
+dataSize: 20000
+GK  cost: 10ms error: 0.04
+
+Query.BaseStation id: 3
+dataSize: 50000
+GK  cost: 11ms error: 0.02
+
+Query.BaseStation id: 6
+dataSize: 440000
+GK  cost: 219ms error: 0.004
+
+Query.BaseStation id: 7
+dataSize: 490000
+GK  cost: 440ms error: 0.002
+ 
+
+GridID: 8
+Query.BaseStation id: 3
+dataSize: 40000
+GK  cost: 10ms error: 0.02
+
+Query.BaseStation id: 4
+dataSize: 80000
+GK  cost: 20ms error: 0.01
+
+Query.BaseStation id: 7
+dataSize: 530000
+GK  cost: 454ms error: 0.002
+
+Query.BaseStation id: 8
+dataSize: 350000
+GK  cost: 540ms error: 0.001
+ 
+
+GridID: 9
+Query.BaseStation id: 4
+dataSize: 710000
+GK  cost: 205ms error: 0.01
+
+Query.BaseStation id: 8
+dataSize: 290000
+GK  cost: 440ms error: 0.001
+ 
+
+GridID: 10
+Query.BaseStation id: 5
+dataSize: 20000
+GK  cost: 0ms error: 0.05
+
+Query.BaseStation id: 9
+dataSize: 980000
+GK  cost: 352ms error: 0.005
+ 
+
+GridID: 11
+Query.BaseStation id: 6
+dataSize: 1000000
+GK  cost: 410ms error: 0.004
+ 
+
+GridID: 12
+Query.BaseStation id: 7
+dataSize: 1000000
+GK  cost: 800ms error: 0.002
+ 
+
+GridID: 13
+Query.BaseStation id: 8
+dataSize: 1000000
+GK  cost: 1444ms error: 0.001
+ 
+
+GridID: 14
+Query.BaseStation id: 8
+dataSize: 1000000
+GK  cost: 1520ms error: 0.001
+ 
+
+GridID: 15
+Query.BaseStation id: 9
+dataSize: 500000
+GK  cost: 200ms error: 0.005
+
+Query.BaseStation id: 13
+dataSize: 500000
+GK  cost: 190ms error: 0.005
+ 
+
+GridID: 16
+Query.BaseStation id: 9
+dataSize: 500000
+GK  cost: 196ms error: 0.005
+
+Query.BaseStation id: 13
+dataSize: 500000
+GK  cost: 190ms error: 0.005
+ 
+
+GridID: 17
+Query.BaseStation id: 15
+dataSize: 1000000
+GK  cost: 300ms error: 0.01
+ 
+
+GridID: 18
+Query.BaseStation id: 12
+dataSize: 470000
+GK  cost: 130ms error: 0.01
+
+Query.BaseStation id: 15
+dataSize: 530000
+GK  cost: 150ms error: 0.01
+ 
+
+GridID: 19
+Query.BaseStation id: 12
+dataSize: 1000000
+GK  cost: 290ms error: 0.01
+ 
+
+GridID: 20
+Query.BaseStation id: 13
+dataSize: 1000000
+GK  cost: 384ms error: 0.005
+ 
+
+GridID: 21
+Query.BaseStation id: 13
+dataSize: 1000000
+GK  cost: 370ms error: 0.005
+ 
+
+GridID: 22
+Query.BaseStation id: 15
+dataSize: 1000000
+GK  cost: 270ms error: 0.01
+ 
+
+GridID: 23
+Query.BaseStation id: 15
+dataSize: 1000000
+GK  cost: 272ms error: 0.01
+ 
+
+GridID: 24
+Query.BaseStation id: 16
+dataSize: 1000000
+GK  cost: 277ms error: 0.02
+ 
+
+QueryID: 1   delay: 800   error: 0.02638902829517964   errorBound: 0.085 
+
+QueryID: 2   delay: 1444   error: 0.026266   errorBound: 0.075 
+
+QueryID: 3   delay: 1520   error: 0.017198567085201066   errorBound: 0.06 
+
+QueryID: 4   delay: 1444   error: 0.004054312727272727   errorBound: 0.068 
+
+QueryID: 5   delay: 880   error: 0.0039958400000000005   errorBound: 0.069 
+
+QueryID: 6   delay: 1520   error: 0.0034248082788790857   errorBound: 0.088 
+
+QueryID: 7   delay: 1444   error: 0.003851666666666667   errorBound: 0.055 
+
+QueryID: 8   delay: 1444   error: 0.015237924   errorBound: 0.056 
+
+QueryID: 9   delay: 370   error: 0.002325   errorBound: 0.07 
+
+QueryID: 10   delay: 800   error: 0.0219175   errorBound: 0.068 
+
+QueryID: 11   delay: 1520   error: 0.011448008   errorBound: 0.073 
+
+QueryID: 12   delay: 800   error: 0.016318912   errorBound: 0.07 
+
+QueryID: 13   delay: 1444   error: 3.086666666666666E-4   errorBound: 0.081 
+
+QueryID: 14   delay: 290   error: 0.01585   errorBound: 0.08 
+
+QueryID: 15   delay: 1825   error: 0.018937756152264874   errorBound: 0.055 
+
+QueryID: 16   delay: 1520   error: 0.0055225   errorBound: 0.066 
+
+QueryID: 17   delay: 540   error: 0.028727151534626134   errorBound: 0.087 
+
+QueryID: 18   delay: 1444   error: 0.02887   errorBound: 0.077 
+
+QueryID: 19   delay: 1444   error: 0.0115523   errorBound: 0.051 
+
+QueryID: 20   delay: 800   error: 0.00800292   errorBound: 0.071 
+
+QueryID: 21   delay: 1444   error: 0.026228571428571427   errorBound: 0.055 
+
+QueryID: 22   delay: 1444   error: 5.333333333333334E-4   errorBound: 0.054 
+
+QueryID: 23   delay: 800   error: 0.014678   errorBound: 0.086 
+
+QueryID: 24   delay: 1444   error: 0.02750242857142857   errorBound: 0.078 
+
+QueryID: 25   delay: 1444   error: 0.019657439199999998   errorBound: 0.076 
+
+QueryID: 26   delay: 880   error: 0.0154656   errorBound: 0.084 
+
+QueryID: 27   delay: 1444   error: 0.014670466666666666   errorBound: 0.07 
+
+QueryID: 28   delay: 410   error: 0.01193924   errorBound: 0.065 
+
+QueryID: 29   delay: 300   error: 0.010606666666666667   errorBound: 0.066 
+
+QueryID: 30   delay: 440   error: 0.01692252   errorBound: 0.062 
+
+QueryID: 31   delay: 1825   error: 0.01047292   errorBound: 0.073 
+
+QueryID: 32   delay: 1825   error: 0.00712896   errorBound: 0.074 
+
+QueryID: 33   delay: 1825   error: 0.011247666666666666   errorBound: 0.084 
+
+QueryID: 34   delay: 880   error: 0.01889417142857143   errorBound: 0.079 
+
+QueryID: 35   delay: 1444   error: 0.012943466666666667   errorBound: 0.06 
+
+QueryID: 36   delay: 1444   error: 0.017320336   errorBound: 0.071 
+
+QueryID: 37   delay: 410   error: 0.01180375   errorBound: 0.082 
+
+QueryID: 38   delay: 1825   error: 0.003841090909090909   errorBound: 0.075 
+
+QueryID: 39   delay: 880   error: 0.026049457142857144   errorBound: 0.088 
+
+QueryID: 40   delay: 1444   error: 0.0118665   errorBound: 0.054 
+
+QueryID: 41   delay: 1444   error: 0.0118565   errorBound: 0.058 
+
+QueryID: 42   delay: 1444   error: 0.0033615   errorBound: 0.067 
+
+QueryID: 43   delay: 880   error: 0.005226309658692267   errorBound: 0.071 
+
+QueryID: 44   delay: 1444   error: 0.0029477333333333337   errorBound: 0.054 
+
+QueryID: 45   delay: 1520   error: 0.013555062158017099   errorBound: 0.067 
+
+QueryID: 46   delay: 800   error: 0.007319504000000001   errorBound: 0.083 
+
+QueryID: 47   delay: 1520   error: 0.0082527072440192   errorBound: 0.051 
+
+QueryID: 48   delay: 368   error: 0.029011066666666665   errorBound: 0.072 
+
+QueryID: 49   delay: 1444   error: 0.007298357142857143   errorBound: 0.076 
+
+QueryID: 50   delay: 800   error: 0.0035375040000000008   errorBound: 0.064 
+
+QueryAvgDelay: 1176Sum Mem: 7064Time cost of dataRedistribution: 60 ms
+ 
+
+GridID: 0
+Query.BaseStation id: 1
+dataSize: 1000000
+GK  cost: 965ms error: 0.05
+ 
+
+GridID: 1
+Query.BaseStation id: 2
+dataSize: 1000000
+GK  cost: 578ms error: 0.04
+ 
+
+GridID: 2
+Query.BaseStation id: 3
+dataSize: 1000000
+GK  cost: 300ms error: 0.02
+ 
+
+GridID: 3
+Query.BaseStation id: 4
+dataSize: 1000000
+GK  cost: 270ms error: 0.01
+ 
+
+GridID: 4
+Query.BaseStation id: 4
+dataSize: 1000000
+GK  cost: 290ms error: 0.01
+ 
+
+GridID: 5
+Query.BaseStation id: 1
+dataSize: 500000
+GK  cost: 221ms error: 0.05
+
+Query.BaseStation id: 5
+dataSize: 500000
+GK  cost: 226ms error: 0.05
+ 
+
+GridID: 6
+Query.BaseStation id: 1
+dataSize: 60000
+GK  cost: 20ms error: 0.05
+
+Query.BaseStation id: 2
+dataSize: 80000
+GK  cost: 20ms error: 0.04
+
+Query.BaseStation id: 5
+dataSize: 60000
+GK  cost: 10ms error: 0.05
+
+Query.BaseStation id: 6
+dataSize: 800000
+GK  cost: 320ms error: 0.004
+ 
+
+GridID: 7
+Query.BaseStation id: 2
+dataSize: 20000
+GK  cost: 10ms error: 0.04
+
+Query.BaseStation id: 3
+dataSize: 50000
+GK  cost: 10ms error: 0.02
+
+Query.BaseStation id: 6
+dataSize: 440000
+GK  cost: 180ms error: 0.004
+
+Query.BaseStation id: 7
+dataSize: 490000
+GK  cost: 340ms error: 0.002
+ 
+
+GridID: 8
+Query.BaseStation id: 3
+dataSize: 40000
+GK  cost: 10ms error: 0.02
+
+Query.BaseStation id: 4
+dataSize: 80000
+GK  cost: 20ms error: 0.01
+
+Query.BaseStation id: 7
+dataSize: 530000
+GK  cost: 360ms error: 0.002
+
+Query.BaseStation id: 8
+dataSize: 350000
+GK  cost: 500ms error: 0.001
+ 
+
+GridID: 9
+Query.BaseStation id: 4
+dataSize: 710000
+GK  cost: 200ms error: 0.01
+
+Query.BaseStation id: 8
+dataSize: 290000
+GK  cost: 424ms error: 0.001
+ 
+
+GridID: 10
+Query.BaseStation id: 5
+dataSize: 20000
+GK  cost: 0ms error: 0.05
+
+Query.BaseStation id: 9
+dataSize: 980000
+GK  cost: 370ms error: 0.005
+ 
+
+GridID: 11
+Query.BaseStation id: 6
+dataSize: 1000000
+GK  cost: 400ms error: 0.004
+ 
+
+GridID: 12
+Query.BaseStation id: 7
+dataSize: 1000000
+GK  cost: 690ms error: 0.002
+ 
+
+GridID: 13
+Query.BaseStation id: 8
+dataSize: 1000000
+GK  cost: 1369ms error: 0.001
+ 
+
+GridID: 14
+Query.BaseStation id: 8
+dataSize: 1000000
+GK  cost: 1411ms error: 0.001
+ 
+
+GridID: 15
+Query.BaseStation id: 9
+dataSize: 500000
+GK  cost: 180ms error: 0.005
+
+Query.BaseStation id: 13
+dataSize: 500000
+GK  cost: 170ms error: 0.005
+ 
+
+GridID: 16
+Query.BaseStation id: 9
+dataSize: 500000
+GK  cost: 180ms error: 0.005
+
+Query.BaseStation id: 13
+dataSize: 500000
+GK  cost: 188ms error: 0.005
+ 
+
+GridID: 17
+Query.BaseStation id: 15
+dataSize: 1000000
+GK  cost: 270ms error: 0.01
+ 
+
+GridID: 18
+Query.BaseStation id: 12
+dataSize: 470000
+GK  cost: 110ms error: 0.01
+
+Query.BaseStation id: 15
+dataSize: 530000
+GK  cost: 108ms error: 0.01
+ 
+
+GridID: 19
+Query.BaseStation id: 12
+dataSize: 1000000
+GK  cost: 210ms error: 0.01
+ 
+
+GridID: 20
+Query.BaseStation id: 13
+dataSize: 1000000
+GK  cost: 282ms error: 0.005
+ 
+
+GridID: 21
+Query.BaseStation id: 13
+dataSize: 1000000
+GK  cost: 288ms error: 0.005
+ 
+
+GridID: 22
+Query.BaseStation id: 15
+dataSize: 1000000
+GK  cost: 220ms error: 0.01
+ 
+
+GridID: 23
+Query.BaseStation id: 15
+dataSize: 1000000
+GK  cost: 210ms error: 0.01
+ 
+
+GridID: 24
+Query.BaseStation id: 16
+dataSize: 1000000
+GK  cost: 229ms error: 0.02
+ 
+
+QueryID: 1   delay: 690   error: 0.02638902829517964   errorBound: 0.085 
+
+QueryID: 2   delay: 1369   error: 0.026266   errorBound: 0.075 
+
+QueryID: 3   delay: 1411   error: 0.017198567085201066   errorBound: 0.06 
+
+QueryID: 4   delay: 1369   error: 0.004054312727272727   errorBound: 0.068 
+
+QueryID: 5   delay: 690   error: 0.0039958400000000005   errorBound: 0.069 
+
+QueryID: 6   delay: 1411   error: 0.0034248082788790857   errorBound: 0.088 
+
+QueryID: 7   delay: 1369   error: 0.003851666666666667   errorBound: 0.055 
+
+QueryID: 8   delay: 1369   error: 0.015237924   errorBound: 0.056 
+
+QueryID: 9   delay: 288   error: 0.002325   errorBound: 0.07 
+
+QueryID: 10   delay: 690   error: 0.0219175   errorBound: 0.068 
+
+QueryID: 11   delay: 1411   error: 0.011448008   errorBound: 0.073 
+
+QueryID: 12   delay: 690   error: 0.016318912   errorBound: 0.07 
+
+QueryID: 13   delay: 1369   error: 3.086666666666666E-4   errorBound: 0.081 
+
+QueryID: 14   delay: 210   error: 0.01585   errorBound: 0.08 
+
+QueryID: 15   delay: 965   error: 0.018937756152264874   errorBound: 0.055 
+
+QueryID: 16   delay: 1411   error: 0.0055225   errorBound: 0.066 
+
+QueryID: 17   delay: 500   error: 0.028727151534626134   errorBound: 0.087 
+
+QueryID: 18   delay: 1369   error: 0.02887   errorBound: 0.077 
+
+QueryID: 19   delay: 1369   error: 0.0115523   errorBound: 0.051 
+
+QueryID: 20   delay: 690   error: 0.00800292   errorBound: 0.071 
+
+QueryID: 21   delay: 1369   error: 0.026228571428571427   errorBound: 0.055 
+
+QueryID: 22   delay: 1369   error: 5.333333333333334E-4   errorBound: 0.054 
+
+QueryID: 23   delay: 690   error: 0.014678   errorBound: 0.086 
+
+QueryID: 24   delay: 1369   error: 0.02750242857142857   errorBound: 0.078 
+
+QueryID: 25   delay: 1369   error: 0.019657439199999998   errorBound: 0.076 
+
+QueryID: 26   delay: 690   error: 0.0154656   errorBound: 0.084 
+
+QueryID: 27   delay: 1369   error: 0.014670466666666666   errorBound: 0.07 
+
+QueryID: 28   delay: 400   error: 0.01193924   errorBound: 0.065 
+
+QueryID: 29   delay: 270   error: 0.010606666666666667   errorBound: 0.066 
+
+QueryID: 30   delay: 400   error: 0.01692252   errorBound: 0.062 
+
+QueryID: 31   delay: 965   error: 0.01047292   errorBound: 0.073 
+
+QueryID: 32   delay: 965   error: 0.00712896   errorBound: 0.074 
+
+QueryID: 33   delay: 1369   error: 0.011247666666666666   errorBound: 0.084 
+
+QueryID: 34   delay: 690   error: 0.01889417142857143   errorBound: 0.079 
+
+QueryID: 35   delay: 1369   error: 0.012943466666666667   errorBound: 0.06 
+
+QueryID: 36   delay: 1369   error: 0.017320336   errorBound: 0.071 
+
+QueryID: 37   delay: 400   error: 0.01180375   errorBound: 0.082 
+
+QueryID: 38   delay: 1369   error: 0.003841090909090909   errorBound: 0.075 
+
+QueryID: 39   delay: 578   error: 0.026049457142857144   errorBound: 0.088 
+
+QueryID: 40   delay: 1369   error: 0.0118665   errorBound: 0.054 
+
+QueryID: 41   delay: 1369   error: 0.0118565   errorBound: 0.058 
+
+QueryID: 42   delay: 1369   error: 0.0033615   errorBound: 0.067 
+
+QueryID: 43   delay: 578   error: 0.005226309658692267   errorBound: 0.071 
+
+QueryID: 44   delay: 1369   error: 0.0029477333333333337   errorBound: 0.054 
+
+QueryID: 45   delay: 1411   error: 0.013555062158017099   errorBound: 0.067 
+
+QueryID: 46   delay: 690   error: 0.007319504000000001   errorBound: 0.083 
+
+QueryID: 47   delay: 1411   error: 0.0082527072440192   errorBound: 0.051 
+
+QueryID: 48   delay: 370   error: 0.029011066666666665   errorBound: 0.072 
+
+QueryID: 49   delay: 1369   error: 0.007298357142857143   errorBound: 0.076 
+
+QueryID: 50   delay: 690   error: 0.0035375040000000008   errorBound: 0.064 
+
+QueryAvgDelay: 1020Sum Mem: 6486Time cost of dataRedistribution: 47 ms
+ 
+
+GridID: 0
+Query.BaseStation id: 1
+dataSize: 1000000
+GK  cost: 969ms error: 0.05
+ 
+
+GridID: 1
+Query.BaseStation id: 2
+dataSize: 1000000
+GK  cost: 531ms error: 0.04
+ 
+
+GridID: 2
+Query.BaseStation id: 3
+dataSize: 1000000
+GK  cost: 241ms error: 0.02
+ 
+
+GridID: 3
+Query.BaseStation id: 4
+dataSize: 1000000
+GK  cost: 210ms error: 0.01
+ 
+
+GridID: 4
+Query.BaseStation id: 4
+dataSize: 1000000
+GK  cost: 210ms error: 0.01
+ 
+
+GridID: 5
+Query.BaseStation id: 1
+dataSize: 500000
+GK  cost: 189ms error: 0.05
+
+Query.BaseStation id: 5
+dataSize: 500000
+GK  cost: 190ms error: 0.05
+ 
+
+GridID: 6
+Query.BaseStation id: 1
+dataSize: 60000
+GK  cost: 10ms error: 0.05
+
+Query.BaseStation id: 2
+dataSize: 80000
+GK  cost: 10ms error: 0.04
+
+Query.BaseStation id: 5
+dataSize: 60000
+GK  cost: 10ms error: 0.05
+
+Query.BaseStation id: 6
+dataSize: 800000
+GK  cost: 269ms error: 0.004
+ 
+
+GridID: 7
+Query.BaseStation id: 2
+dataSize: 20000
+GK  cost: 10ms error: 0.04
+
+Query.BaseStation id: 3
+dataSize: 50000
+GK  cost: 10ms error: 0.02
+
+Query.BaseStation id: 6
+dataSize: 440000
+GK  cost: 140ms error: 0.004
+
+Query.BaseStation id: 7
+dataSize: 490000
+GK  cost: 270ms error: 0.002
+ 
+
+GridID: 8
+Query.BaseStation id: 3
+dataSize: 40000
+GK  cost: 10ms error: 0.02
+
+Query.BaseStation id: 4
+dataSize: 80000
+GK  cost: 10ms error: 0.01
+
+Query.BaseStation id: 7
+dataSize: 530000
+GK  cost: 287ms error: 0.002
+
+Query.BaseStation id: 8
+dataSize: 350000
+GK  cost: 400ms error: 0.001
+ 
+
+GridID: 9
+Query.BaseStation id: 4
+dataSize: 710000
+GK  cost: 150ms error: 0.01
+
+Query.BaseStation id: 8
+dataSize: 290000
+GK  cost: 332ms error: 0.001
+ 
+
+GridID: 10
+Query.BaseStation id: 5
+dataSize: 20000
+GK  cost: 0ms error: 0.05
+
+Query.BaseStation id: 9
+dataSize: 980000
+GK  cost: 270ms error: 0.005
+ 
+
+GridID: 11
+Query.BaseStation id: 6
+dataSize: 1000000
+GK  cost: 328ms error: 0.004
+ 
+
+GridID: 12
+Query.BaseStation id: 7
+dataSize: 1000000
+GK  cost: 558ms error: 0.002
+ 
+
+GridID: 13
+Query.BaseStation id: 8
+dataSize: 1000000
+GK  cost: 1132ms error: 0.001
+ 
+
+GridID: 14
+Query.BaseStation id: 8
+dataSize: 1000000
+GK  cost: 1145ms error: 0.001
+ 
+
+GridID: 15
+Query.BaseStation id: 9
+dataSize: 500000
+GK  cost: 150ms error: 0.005
+
+Query.BaseStation id: 13
+dataSize: 500000
+GK  cost: 150ms error: 0.005
+ 
+
+GridID: 16
+Query.BaseStation id: 9
+dataSize: 500000
+GK  cost: 160ms error: 0.005
+
+Query.BaseStation id: 13
+dataSize: 500000
+GK  cost: 140ms error: 0.005
+ 
+
+GridID: 17
+Query.BaseStation id: 15
+dataSize: 1000000
+GK  cost: 220ms error: 0.01
+ 
+
+GridID: 18
+Query.BaseStation id: 12
+dataSize: 470000
+GK  cost: 100ms error: 0.01
+
+Query.BaseStation id: 15
+dataSize: 530000
+GK  cost: 110ms error: 0.01
+ 
+
+GridID: 19
+Query.BaseStation id: 12
+dataSize: 1000000
+GK  cost: 220ms error: 0.01
+ 
+
+GridID: 20
+Query.BaseStation id: 13
+dataSize: 1000000
+GK  cost: 298ms error: 0.005
+ 
+
+GridID: 21
+Query.BaseStation id: 13
+dataSize: 1000000
+GK  cost: 280ms error: 0.005
+ 
+
+GridID: 22
+Query.BaseStation id: 15
+dataSize: 1000000
+GK  cost: 220ms error: 0.01
+ 
+
+GridID: 23
+Query.BaseStation id: 15
+dataSize: 1000000
+GK  cost: 220ms error: 0.01
+ 
+
+GridID: 24
+Query.BaseStation id: 16
+dataSize: 1000000
+GK  cost: 240ms error: 0.02
+ 
+
+QueryID: 1   delay: 558   error: 0.02638902829517964   errorBound: 0.085 
+
+QueryID: 2   delay: 1132   error: 0.026266   errorBound: 0.075 
+
+QueryID: 3   delay: 1145   error: 0.017198567085201066   errorBound: 0.06 
+
+QueryID: 4   delay: 1132   error: 0.004054312727272727   errorBound: 0.068 
+
+QueryID: 5   delay: 558   error: 0.0039958400000000005   errorBound: 0.069 
+
+QueryID: 6   delay: 1145   error: 0.0034248082788790857   errorBound: 0.088 
+
+QueryID: 7   delay: 1132   error: 0.003851666666666667   errorBound: 0.055 
+
+QueryID: 8   delay: 1132   error: 0.015237924   errorBound: 0.056 
+
+QueryID: 9   delay: 280   error: 0.002325   errorBound: 0.07 
+
+QueryID: 10   delay: 558   error: 0.0219175   errorBound: 0.068 
+
+QueryID: 11   delay: 1145   error: 0.011448008   errorBound: 0.073 
+
+QueryID: 12   delay: 558   error: 0.016318912   errorBound: 0.07 
+
+QueryID: 13   delay: 1132   error: 3.086666666666666E-4   errorBound: 0.081 
+
+QueryID: 14   delay: 220   error: 0.01585   errorBound: 0.08 
+
+QueryID: 15   delay: 969   error: 0.018937756152264874   errorBound: 0.055 
+
+QueryID: 16   delay: 1145   error: 0.0055225   errorBound: 0.066 
+
+QueryID: 17   delay: 400   error: 0.028727151534626134   errorBound: 0.087 
+
+QueryID: 18   delay: 1132   error: 0.02887   errorBound: 0.077 
+
+QueryID: 19   delay: 1132   error: 0.0115523   errorBound: 0.051 
+
+QueryID: 20   delay: 558   error: 0.00800292   errorBound: 0.071 
+
+QueryID: 21   delay: 1132   error: 0.026228571428571427   errorBound: 0.055 
+
+QueryID: 22   delay: 1132   error: 5.333333333333334E-4   errorBound: 0.054 
+
+QueryID: 23   delay: 558   error: 0.014678   errorBound: 0.086 
+
+QueryID: 24   delay: 1132   error: 0.02750242857142857   errorBound: 0.078 
+
+QueryID: 25   delay: 1132   error: 0.019657439199999998   errorBound: 0.076 
+
+QueryID: 26   delay: 558   error: 0.0154656   errorBound: 0.084 
+
+QueryID: 27   delay: 1132   error: 0.014670466666666666   errorBound: 0.07 
+
+QueryID: 28   delay: 328   error: 0.01193924   errorBound: 0.065 
+
+QueryID: 29   delay: 240   error: 0.010606666666666667   errorBound: 0.066 
+
+QueryID: 30   delay: 328   error: 0.01692252   errorBound: 0.062 
+
+QueryID: 31   delay: 969   error: 0.01047292   errorBound: 0.073 
+
+QueryID: 32   delay: 969   error: 0.00712896   errorBound: 0.074 
+
+QueryID: 33   delay: 1132   error: 0.011247666666666666   errorBound: 0.084 
+
+QueryID: 34   delay: 558   error: 0.01889417142857143   errorBound: 0.079 
+
+QueryID: 35   delay: 1132   error: 0.012943466666666667   errorBound: 0.06 
+
+QueryID: 36   delay: 1132   error: 0.017320336   errorBound: 0.071 
+
+QueryID: 37   delay: 328   error: 0.01180375   errorBound: 0.082 
+
+QueryID: 38   delay: 1132   error: 0.003841090909090909   errorBound: 0.075 
+
+QueryID: 39   delay: 531   error: 0.026049457142857144   errorBound: 0.088 
+
+QueryID: 40   delay: 1132   error: 0.0118665   errorBound: 0.054 
+
+QueryID: 41   delay: 1132   error: 0.0118565   errorBound: 0.058 
+
+QueryID: 42   delay: 1132   error: 0.0033615   errorBound: 0.067 
+
+QueryID: 43   delay: 531   error: 0.005226309658692267   errorBound: 0.071 
+
+QueryID: 44   delay: 1132   error: 0.0029477333333333337   errorBound: 0.054 
+
+QueryID: 45   delay: 1145   error: 0.013555062158017099   errorBound: 0.067 
+
+QueryID: 46   delay: 558   error: 0.007319504000000001   errorBound: 0.083 
+
+QueryID: 47   delay: 1145   error: 0.0082527072440192   errorBound: 0.051 
+
+QueryID: 48   delay: 270   error: 0.029011066666666665   errorBound: 0.072 
+
+QueryID: 49   delay: 1132   error: 0.007298357142857143   errorBound: 0.076 
+
+QueryID: 50   delay: 558   error: 0.0035375040000000008   errorBound: 0.064 
+
+QueryAvgDelay: 851Sum Mem: 6819Time cost of dataRedistribution: 30 ms
+ 
+
+GridID: 0
+Query.BaseStation id: 1
+dataSize: 1000000
+GK  cost: 800ms error: 0.05
+ 
+
+GridID: 1
+Query.BaseStation id: 2
+dataSize: 1000000
+GK  cost: 460ms error: 0.04
+ 
+
+GridID: 2
+Query.BaseStation id: 3
+dataSize: 1000000
+GK  cost: 230ms error: 0.02
+ 
+
+GridID: 3
+Query.BaseStation id: 4
+dataSize: 1000000
+GK  cost: 218ms error: 0.01
+ 
+
+GridID: 4
+Query.BaseStation id: 4
+dataSize: 1000000
+GK  cost: 230ms error: 0.01
+ 
+
+GridID: 5
+Query.BaseStation id: 1
+dataSize: 500000
+GK  cost: 192ms error: 0.05
+
+Query.BaseStation id: 5
+dataSize: 500000
+GK  cost: 180ms error: 0.05
+ 
+
+GridID: 6
+Query.BaseStation id: 1
+dataSize: 60000
+GK  cost: 10ms error: 0.05
+
+Query.BaseStation id: 2
+dataSize: 80000
+GK  cost: 17ms error: 0.04
+
+Query.BaseStation id: 5
+dataSize: 60000
+GK  cost: 10ms error: 0.05
+
+Query.BaseStation id: 6
+dataSize: 800000
+GK  cost: 280ms error: 0.004
+ 
+
+GridID: 7
+Query.BaseStation id: 2
+dataSize: 20000
+GK  cost: 0ms error: 0.04
+
+Query.BaseStation id: 3
+dataSize: 50000
+GK  cost: 10ms error: 0.02
+
+Query.BaseStation id: 6
+dataSize: 440000
+GK  cost: 150ms error: 0.004
+
+Query.BaseStation id: 7
+dataSize: 490000
+GK  cost: 288ms error: 0.002
+ 
+
+GridID: 8
+Query.BaseStation id: 3
+dataSize: 40000
+GK  cost: 10ms error: 0.02
+
+Query.BaseStation id: 4
+dataSize: 80000
+GK  cost: 20ms error: 0.01
+
+Query.BaseStation id: 7
+dataSize: 530000
+GK  cost: 310ms error: 0.002
+
+Query.BaseStation id: 8
+dataSize: 350000
+GK  cost: 408ms error: 0.001
+ 
+
+GridID: 9
+Query.BaseStation id: 4
+dataSize: 710000
+GK  cost: 160ms error: 0.01
+
+Query.BaseStation id: 8
+dataSize: 290000
+GK  cost: 360ms error: 0.001
+ 
+
+GridID: 10
+Query.BaseStation id: 5
+dataSize: 20000
+GK  cost: 0ms error: 0.05
+
+Query.BaseStation id: 9
+dataSize: 980000
+GK  cost: 301ms error: 0.005
+ 
+
+GridID: 11
+Query.BaseStation id: 6
+dataSize: 1000000
+GK  cost: 349ms error: 0.004
+ 
+
+GridID: 12
+Query.BaseStation id: 7
+dataSize: 1000000
+GK  cost: 558ms error: 0.002
+ 
+
+GridID: 13
+Query.BaseStation id: 8
+dataSize: 1000000
+GK  cost: 1182ms error: 0.001
+ 
+
+GridID: 14
+Query.BaseStation id: 8
+dataSize: 1000000
+GK  cost: 1191ms error: 0.001
+ 
+
+GridID: 15
+Query.BaseStation id: 9
+dataSize: 500000
+GK  cost: 150ms error: 0.005
+
+Query.BaseStation id: 13
+dataSize: 500000
+GK  cost: 150ms error: 0.005
+ 
+
+GridID: 16
+Query.BaseStation id: 9
+dataSize: 500000
+GK  cost: 148ms error: 0.005
+
+Query.BaseStation id: 13
+dataSize: 500000
+GK  cost: 150ms error: 0.005
+ 
+
+GridID: 17
+Query.BaseStation id: 15
+dataSize: 1000000
+GK  cost: 230ms error: 0.01
+ 
+
+GridID: 18
+Query.BaseStation id: 12
+dataSize: 470000
+GK  cost: 100ms error: 0.01
+
+Query.BaseStation id: 15
+dataSize: 530000
+GK  cost: 120ms error: 0.01
+ 
+
+GridID: 19
+Query.BaseStation id: 12
+dataSize: 1000000
+GK  cost: 220ms error: 0.01
+ 
+
+GridID: 20
+Query.BaseStation id: 13
+dataSize: 1000000
+GK  cost: 310ms error: 0.005
+ 
+
+GridID: 21
+Query.BaseStation id: 13
+dataSize: 1000000
+GK  cost: 300ms error: 0.005
+ 
+
+GridID: 22
+Query.BaseStation id: 15
+dataSize: 1000000
+GK  cost: 240ms error: 0.01
+ 
+
+GridID: 23
+Query.BaseStation id: 15
+dataSize: 1000000
+GK  cost: 230ms error: 0.01
+ 
+
+GridID: 24
+Query.BaseStation id: 16
+dataSize: 1000000
+GK  cost: 229ms error: 0.02
+ 
+
+QueryID: 1   delay: 558   error: 0.02070908   errorBound: 0.085 
+
+QueryID: 2   delay: 1182   error: 0.026266   errorBound: 0.075 
+
+QueryID: 3   delay: 1191   error: 0.017198567085201066   errorBound: 0.06 
+
+QueryID: 4   delay: 1182   error: 0.004054312727272727   errorBound: 0.068 
+
+QueryID: 5   delay: 558   error: 0.0039958400000000005   errorBound: 0.069 
+
+QueryID: 6   delay: 1191   error: 0.0034248082788790857   errorBound: 0.088 
+
+QueryID: 7   delay: 1182   error: 0.003851666666666667   errorBound: 0.055 
+
+QueryID: 8   delay: 1182   error: 0.015237924   errorBound: 0.056 
+
+QueryID: 9   delay: 300   error: 0.002325   errorBound: 0.07 
+
+QueryID: 10   delay: 558   error: 0.0219175   errorBound: 0.068 
+
+QueryID: 11   delay: 1191   error: 0.011448008   errorBound: 0.073 
+
+QueryID: 12   delay: 558   error: 0.016318912   errorBound: 0.07 
+
+QueryID: 13   delay: 1182   error: 3.086666666666666E-4   errorBound: 0.081 
+
+QueryID: 14   delay: 230   error: 0.01585   errorBound: 0.08 
+
+QueryID: 15   delay: 800   error: 0.010894472727272727   errorBound: 0.055 
+
+QueryID: 16   delay: 1191   error: 0.0055225   errorBound: 0.066 
+
+QueryID: 17   delay: 408   error: 0.028727151534626134   errorBound: 0.087 
+
+QueryID: 18   delay: 1182   error: 0.02887   errorBound: 0.077 
+
+QueryID: 19   delay: 1182   error: 0.0115523   errorBound: 0.051 
+
+QueryID: 20   delay: 558   error: 0.00800292   errorBound: 0.071 
+
+QueryID: 21   delay: 1182   error: 0.026228571428571427   errorBound: 0.055 
+
+QueryID: 22   delay: 1182   error: 5.333333333333334E-4   errorBound: 0.054 
+
+QueryID: 23   delay: 558   error: 0.014678   errorBound: 0.086 
+
+QueryID: 24   delay: 1182   error: 0.02750242857142857   errorBound: 0.078 
+
+QueryID: 25   delay: 1182   error: 0.019657439199999998   errorBound: 0.076 
+
+QueryID: 26   delay: 558   error: 0.0154656   errorBound: 0.084 
+
+QueryID: 27   delay: 1182   error: 0.014670466666666666   errorBound: 0.07 
+
+QueryID: 28   delay: 349   error: 0.01193924   errorBound: 0.065 
+
+QueryID: 29   delay: 240   error: 0.010606666666666667   errorBound: 0.066 
+
+QueryID: 30   delay: 349   error: 0.01692252   errorBound: 0.062 
+
+QueryID: 31   delay: 800   error: 0.01047292   errorBound: 0.073 
+
+QueryID: 32   delay: 800   error: 0.00712896   errorBound: 0.074 
+
+QueryID: 33   delay: 1182   error: 0.011247666666666666   errorBound: 0.084 
+
+QueryID: 34   delay: 558   error: 0.01889417142857143   errorBound: 0.079 
+
+QueryID: 35   delay: 1182   error: 0.012943466666666667   errorBound: 0.06 
+
+QueryID: 36   delay: 1182   error: 0.017320336   errorBound: 0.071 
+
+QueryID: 37   delay: 349   error: 0.01180375   errorBound: 0.082 
+
+QueryID: 38   delay: 1182   error: 0.003841090909090909   errorBound: 0.075 
+
+QueryID: 39   delay: 460   error: 0.026049457142857144   errorBound: 0.088 
+
+QueryID: 40   delay: 1182   error: 0.0118665   errorBound: 0.054 
+
+QueryID: 41   delay: 1182   error: 0.0118565   errorBound: 0.058 
+
+QueryID: 42   delay: 1182   error: 0.0033615   errorBound: 0.067 
+
+QueryID: 43   delay: 460   error: 0.005226309658692267   errorBound: 0.071 
+
+QueryID: 44   delay: 1182   error: 0.0029477333333333337   errorBound: 0.054 
+
+QueryID: 45   delay: 1191   error: 0.013555062158017099   errorBound: 0.067 
+
+QueryID: 46   delay: 558   error: 0.007319504000000001   errorBound: 0.083 
+
+QueryID: 47   delay: 1191   error: 0.0082527072440192   errorBound: 0.051 
+
+QueryID: 48   delay: 301   error: 0.029011066666666665   errorBound: 0.072 
+
+QueryID: 49   delay: 1182   error: 0.007298357142857143   errorBound: 0.076 
+
+QueryID: 50   delay: 558   error: 0.0035375040000000008   errorBound: 0.064 
+
+QueryAvgDelay: 867Sum Mem: 7241
