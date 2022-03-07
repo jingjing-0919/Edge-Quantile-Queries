@@ -1,8 +1,8 @@
 package Util;
 
-import Query.BaseStation;
-import Query.Query;
-import Query.Cell;
+import Model.BaseStation;
+import Model.Query;
+import Model.Cell;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

@@ -1,10 +1,10 @@
 package Util;
 
 import Config.config;
-import Query.BaseStation;
-import Query.Cell;
-import Query.Query;
-import Query.RunWithReturn;
+import Model.BaseStation;
+import Model.Cell;
+import Model.Query;
+import Experiment.RunWithReturn;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -15,7 +15,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 
 public class ConcurrentQueryUtil {
-    public static ArrayList<Integer> execute(Cell cell, int id, ArrayList<BaseStation> arr, HashMap<BaseStation,Double> yita, int dataSize, String csvFile1) throws IOException {
+    public static ArrayList<Integer> execute(Cell cell, int id, ArrayList<BaseStation> arr, HashMap<BaseStation,Double> eta, int dataSize, String csvFile1) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter("./src/TestResultLog/ConcurrentQueryTestResult.txt", true));
         bw.write(" \r\n");
         bw.write("\r\n");
@@ -25,8 +25,8 @@ public class ConcurrentQueryUtil {
         ArrayList<Integer> quantile = new ArrayList<>();
         int delayMax = 0;
         for (BaseStation baseStation : arr) {
-            if (yita.get(baseStation) != 0.0){
-                ArrayList<Integer> arrayList = RunWithReturn.run(cell,baseStation, (int) (dataSize * yita.get(baseStation)), csvFile1, 0.5, (int) temp * dataSize);
+            if (eta.get(baseStation) != 0.0){
+                ArrayList<Integer> arrayList = RunWithReturn.run(cell,baseStation, (int) (dataSize * eta.get(baseStation)), csvFile1, 0.5, (int) temp * dataSize);
                 int index = arrayList.size()-1;
                 int delay = arrayList.get(index);
                 arrayList.remove(index);
@@ -35,11 +35,11 @@ public class ConcurrentQueryUtil {
                     delayMax = delay;
                 }
             }
-            temp = temp + yita.get(baseStation);
+            temp = temp + eta.get(baseStation);
         }
         double errorRate = 0;
         for (BaseStation baseStation : arr) {
-            errorRate = errorRate + yita.get(baseStation) * baseStation.getE();
+            errorRate = errorRate + eta.get(baseStation) * baseStation.getE();
         }
         cell.delay = delayMax;
 
@@ -83,7 +83,7 @@ public class ConcurrentQueryUtil {
 
 
     public static void Calculate(double errorBound, Cell cell){//distribute the data under the given errorBound
-        cell.yita.clear();
+        cell.eta.clear();
         double [] upper = new double[cell.arr.size()];
         ArrayList<BaseStation> arr = cell.arr;
         int[] set = new int[arr.size()];
@@ -93,9 +93,9 @@ public class ConcurrentQueryUtil {
         for (int i = 0; i < arr.size(); i++) {
             upper[i] = computeDataUpperBound(errorBound, arr, i);
         }
-        double yita = 1;
-        double[] yita_final = new double[arr.size()];
-        while (yita > 0) {
+        double eta = 1;
+        double[] eta_final = new double[arr.size()];
+        while (eta > 0) {
             double z = 0;
             for (int i = 0; i < arr.size(); i++) {
                 if (set[i] == 0) {
@@ -105,14 +105,14 @@ public class ConcurrentQueryUtil {
             boolean flag = true;
             for (int i = 0; i < arr.size(); i++) {
                 if (set[i] == 0) {
-                    double yita_i = Math.round(yita * 100 / (arr.get(i).getUTC() * z)) / 100.0;
-                    if (arr.get(i).getE() > errorBound && yita_i > upper[i]) {
-                        yita_final[i] = upper[i];
+                    double eta_i = Math.round(eta * 100 / (arr.get(i).getUTC() * z)) / 100.0;
+                    if (arr.get(i).getE() > errorBound && eta_i > upper[i]) {
+                        eta_final[i] = upper[i];
                         set[i] = 1;
                         flag = false;
-                        yita = yita - upper[i];
+                        eta = eta - upper[i];
                     } else {
-                        yita_final[i] = yita_i;
+                        eta_final[i] = eta_i;
                     }
                 }
             }
@@ -120,9 +120,9 @@ public class ConcurrentQueryUtil {
                 break;
             }
         }
-        for (int i = 0;i < yita_final.length;i++){
-            cell.yita.put(arr.get(i),yita_final[i]);
-            cell.delay = yita_final[i] * cell.dataVolume * cell.arr.get(i).getUTC();
+        for (int i = 0;i < eta_final.length;i++){
+            cell.eta.put(arr.get(i),eta_final[i]);
+            cell.delay = eta_final[i] * cell.dataVolume * cell.arr.get(i).getUTC();
             cell.error = errorBound;
         }
     }
@@ -143,7 +143,7 @@ public class ConcurrentQueryUtil {
 
     public static boolean distribute(double delay, Cell cell){
         cell.arr.sort(Comparator.comparingDouble(BaseStation::getE));
-        HashMap<BaseStation,Double> yita = new HashMap<>();
+        HashMap<BaseStation,Double> eta = new HashMap<>();
         double data = cell.dataVolume;
         int index = 0;
         double temp_e = 0;
@@ -152,19 +152,19 @@ public class ConcurrentQueryUtil {
             double cur_data = delay / cur.getUTC();
             if (cur_data < data){
                 data = data - cur_data;
-                yita.put(cur,cur_data/ cell.dataVolume);
+                eta.put(cur,cur_data/ cell.dataVolume);
                 index++;
                 temp_e = temp_e + cur.getE() * cur_data;
             }
             else {
-                yita.put(cur,data/ cell.dataVolume);
+                eta.put(cur,data/ cell.dataVolume);
                 temp_e = temp_e + cur.getE() * data;
                 data = 0;
             }
         }
         for (int i = 0; i < cell.arr.size(); i++){
-            if (!yita.containsKey(cell.arr.get(i))){
-                yita.put(cell.arr.get(i),0.0);
+            if (!eta.containsKey(cell.arr.get(i))){
+                eta.put(cell.arr.get(i),0.0);
             }
         }
 
@@ -179,7 +179,7 @@ public class ConcurrentQueryUtil {
             }
         }
         if (flag && data == 0){
-            cell.yita = yita;
+            cell.eta = eta;
             cell.delay = delay;
             cell.error = temp_e/ cell.dataVolume;
             return  true;

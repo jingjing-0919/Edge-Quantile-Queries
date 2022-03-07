@@ -8,14 +8,14 @@ public class config {
        ["QW", "CB", "CB-I", "CB-E", "CB-R", "CP"] for ConcurrentQuery
     */
 
-    public static String DataFile = "./src/Data/test2000000.txt";
+    public static String DataFile = "./Data/geolife1.txt";
 
-    public static String BaseStationFile = "./src/Data/baseStations16.txt";
+    public static String BaseStationFile = "./Data/baseStations16.txt";
     /* choose from "./src/Data/baseStations16.txt" or "./src/Data/baseStations24.txt" or "./src/Data/baseStations32.txt"
        to decide the number of baseStations
      */
 
-    public static String QueryFile = "./src/Data/Query50.txt";
+    public static String QueryFile = "./Data/Query50.txt";
     /* choose from  ["./src/Data/Query50.txt" , "./src/Data/Query50.txt" , "./src/Data/Query50.txt" ,
        "./src/Data/Query50.txt" , "./src/Data/Query50.txt" ] to decide the number of queries
      */
@@ -25,7 +25,7 @@ public class config {
     public static int Cell_length = 1000;
     // choose from [250, 500, 1000]
 
-    public static int dataVolume = 1000000;
+    public static int dataVolume = 500000;
     // dataVolume for one Cell. UN = #cells * dataVolume.
 
     /* when Cell_length = 1000, there are 25 cells in total, for UN = 25M, dataVolume = 1000000;
@@ -35,5 +35,7 @@ public class config {
 
     public static int x_length = 5000;
     public static int y_length = 5000;
+
+    public static double relaxRate = 0.2;
 
 }
