@@ -4,7 +4,7 @@ import Config.config;
 import Model.BaseStation;
 import Model.Cell;
 import Model.Query;
-import Experiment.RunWithReturn;
+import Experiment.ConcurrentRunner;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 public class ConcurrentQueryUtil {
     public static ArrayList<Integer> execute(Cell cell, int id, ArrayList<BaseStation> arr, HashMap<BaseStation,Double> eta, int dataSize, String csvFile1) throws IOException {
-        BufferedWriter bw = new BufferedWriter(new FileWriter("./src/TestResultLog/ConcurrentQueryTestResult.txt", true));
+        BufferedWriter bw = new BufferedWriter(new FileWriter("./TestResultLog/ConcurrentQueryTestResult.txt", true));
         bw.write(" \r\n");
         bw.write("\r\n");
         bw.write("GridID: "+ id);
@@ -26,7 +26,7 @@ public class ConcurrentQueryUtil {
         int delayMax = 0;
         for (BaseStation baseStation : arr) {
             if (eta.get(baseStation) != 0.0){
-                ArrayList<Integer> arrayList = RunWithReturn.run(cell,baseStation, (int) (dataSize * eta.get(baseStation)), csvFile1, 0.5, (int) temp * dataSize);
+                ArrayList<Integer> arrayList = ConcurrentRunner.run(cell,baseStation, (int) (dataSize * eta.get(baseStation)), csvFile1, 0.5, (int) temp * dataSize);
                 int index = arrayList.size()-1;
                 int delay = arrayList.get(index);
                 arrayList.remove(index);
@@ -46,7 +46,7 @@ public class ConcurrentQueryUtil {
         return quantile;
     }
 
-    public static Cell checkBottleneck1(ArrayList<Cell> cells){
+    public static Cell checkBottleneck_minMax(ArrayList<Cell> cells){
         Cell bottleneck = cells.get(0);
         for (Cell cell : cells) {
             if (bottleneck.delay < cell.delay && cell.set.size() != 0) {
@@ -56,7 +56,7 @@ public class ConcurrentQueryUtil {
         return bottleneck;
     }
 
-    public static Cell checkBottleneck(ArrayList<Cell> cells, ArrayList<Query>queries){
+    public static Cell checkBottleneck_minAvg(ArrayList<Cell> cells, ArrayList<Query>queries){
         int []cnt = new int[cells.size()];
         for (Query query : queries) {
             for (int j = 0; j < query.covered.size(); j++) {
@@ -141,63 +141,17 @@ public class ConcurrentQueryUtil {
         }
     }
 
-    public static boolean distribute(double delay, Cell cell){
-        cell.arr.sort(Comparator.comparingDouble(BaseStation::getE));
-        HashMap<BaseStation,Double> eta = new HashMap<>();
-        double data = cell.dataVolume;
-        int index = 0;
-        double temp_e = 0;
-        while (data > 0 && index < cell.arr.size()){
-            BaseStation cur = cell.arr.get(index);
-            double cur_data = delay / cur.getUTC();
-            if (cur_data < data){
-                data = data - cur_data;
-                eta.put(cur,cur_data/ cell.dataVolume);
-                index++;
-                temp_e = temp_e + cur.getE() * cur_data;
-            }
-            else {
-                eta.put(cur,data/ cell.dataVolume);
-                temp_e = temp_e + cur.getE() * data;
-                data = 0;
-            }
-        }
-        for (int i = 0; i < cell.arr.size(); i++){
-            if (!eta.containsKey(cell.arr.get(i))){
-                eta.put(cell.arr.get(i),0.0);
-            }
-        }
-
-        double error = cell.error * cell.dataVolume;
-        double error_increase = temp_e - error;
-        boolean flag = true;
-        for (int i = 0; i < cell.set.size(); i++){
-            Query query = cell.set.get(i);
-            if (query.error + error_increase/query.dataSize > query.getErrorBound()){
-                flag = false;
-                break;
-            }
-        }
-        if (flag && data == 0){
-            cell.eta = eta;
-            cell.delay = delay;
-            cell.error = temp_e/ cell.dataVolume;
-            return  true;
-        }
-        else {
-            return false;
-        }
-
-
-
-    }
-
-
 
     public static void CalculateError(ArrayList<Query>checkList){
         for (Query cur : checkList) {
             int temp_N = 0;
             double temp_e = 0;
+            if (config.Method.equals("CB-E")){
+                for (int j = 0; j < cur.intersecting.size(); j++) {
+                    temp_e = temp_e + 0.1 * calculateEGError(cur,cur.intersecting.get(j));
+                    temp_N = temp_N + cur.intersecting.get(j).dataVolume;
+                }
+            }
             for (int j = 0; j < cur.covered.size(); j++) {
                 temp_e = temp_e + 0.1*calculateIGError(cur,cur.covered.get(j));
                 temp_N = temp_N + cur.covered.get(j).dataVolume;
@@ -206,13 +160,6 @@ public class ConcurrentQueryUtil {
             cur.dataSize = temp_N;
         }
     }
-
-
-
-
-
-
-
 
 
 
@@ -238,18 +185,23 @@ public class ConcurrentQueryUtil {
     }
 
     public static void checkIG(Query query) {
-        double y = 0;
-        int N = 0;
-        for (int j = 0; j < query.covered.size(); j++) {
-            y = y + query.covered.get(j).error * query.covered.get(j).dataVolume;
-            N = N + query.covered.get(j).dataVolume;
+        if(config.Method.equals("CB") || config.Method.equals("CB/R") || config.Method.equals("CP")){
+            double y = 0;
+            int N = 0;
+            for (int j = 0; j < query.covered.size(); j++) {
+                y = y + query.covered.get(j).error * query.covered.get(j).dataVolume;
+                N = N + query.covered.get(j).dataVolume;
+            }
+            for (int j = 0; j < query.intersecting.size(); j++) {
+                N = N + query.intersecting.get(j).dataVolume;
+            }
+            for (int i = 0; i < query.intersecting.size(); i++) {
+                Cell IG = query.intersecting.get(i);
+                calculateIG(query, IG, N);
+            }
         }
-        for (int j = 0; j < query.intersecting.size(); j++) {
-            N = N + query.intersecting.get(j).dataVolume;
-        }
-        for (int i = 0; i < query.intersecting.size(); i++) {
-            Cell IG = query.intersecting.get(i);
-            calculateIG(query, IG, N);
+        else if (config.Method.equals("CB-I")){
+            query.covered.addAll(query.intersecting);
         }
     }
 
@@ -309,11 +261,6 @@ public class ConcurrentQueryUtil {
     }
 
 
-    public static boolean calculate(Query query,BaseStation baseStation){
-        boolean x1 = baseStation.getLongitude() > query.getX_left() && baseStation.getLongitude() < query.getX_right();
-        boolean y1 = baseStation.getLatitude() > query.getY_left() && baseStation.getLatitude() < query.getY_right();
-        return x1 && y1;
-    }
 
     public static int calculateEGError(Query query, Cell cell) {
 
@@ -357,7 +304,7 @@ public class ConcurrentQueryUtil {
         return Math.sqrt((x - x1)*(x-x1) + (y - y1)*(y-y1));
     }
 
-    public static double calculateMiniError(Cell cell) {
+    public static double getMiniError(Cell cell) {
         ArrayList<BaseStation> arr = cell.arr;
         double z = 1;
         for (BaseStation baseStation : arr) {
@@ -366,5 +313,24 @@ public class ConcurrentQueryUtil {
             }
         }
         return z;
+    }
+
+    public static void CP_Calculate(Cell cell){
+        cell.eta.clear();
+        double min_error = 1;
+        int index = 0;
+        for (int i = 0;i < cell.arr.size();i++){
+            if (min_error < cell.arr.get(i).getE()){
+                min_error = cell.arr.get(i).getE();
+                index = i;
+            }
+        }
+        cell.eta.put(cell.arr.get(index),1.0);
+        for (int i = 0;i < cell.arr.size();i++){
+            if (index != i){
+                cell.eta.put(cell.arr.get(i),0.0);
+            }
+        }
+
     }
 }

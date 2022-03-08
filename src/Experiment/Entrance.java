@@ -5,43 +5,12 @@ import java.io.IOException;
 
 public class Entrance {
     public static void main(String[] args) throws IOException {
-        switch (config.Method) {
-            case "DFE":
-                SingleQuery.SingleQueryRun();
-                break;
-            case "EDFE":
-                SingleQuery.SingleQueryRun();
-                break;
-            case "LDFE":
-                SingleQuery.SingleQueryRun();
-                break;
-            case "NDFE":
-                SingleQuery.SingleQueryRun();
-                break;
-            case "SDFE":
-                SingleQuery.SingleQueryRun();
-                break;
-            case "BTA":
-                SingleQuery.SingleQueryRun();
-                break;
-            case "QW":
-                ConcurrentQuery.ConcurrentQueryRun();
-                break;
-            case "CB":
-                ConcurrentQuery.ConcurrentQueryRun();
-                break;
-            case "CB-I":
-                ConcurrentQuery.ConcurrentQueryRun();
-                break;
-            case "CB-E":
-                ConcurrentQuery.ConcurrentQueryRun();
-                break;
-            case "CB-R":
-                ConcurrentQuery.ConcurrentQueryRun();
-                break;
-            case "CP":
-                ConcurrentQuery.ConcurrentQueryRun();
-                break;
+        if (config.Method.equals("DFE") || config.Method.equals("EDFE") || config.Method.equals("LDFE") ||
+                config.Method.equals("NDFE") || config.Method.equals("SDFE") || config.Method.equals("BTA")){
+            SingleQuery.SingleQueryRun();
+        }
+        else {
+            ConcurrentQuery.ConcurrentQueryRun();
         }
     }
 }

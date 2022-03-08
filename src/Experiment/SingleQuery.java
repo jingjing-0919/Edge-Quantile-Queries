@@ -53,7 +53,7 @@ public class SingleQuery {
         }
 
         for (Cell cell : cells) {
-            cell.minError = SingleQueryUtil.calculateMiniError(cell);
+            cell.minError = SingleQueryUtil.getMiniError(cell);
             cell.error = cell.minError;
         }
         // choose to include or exclude Intersecting Cells
@@ -73,7 +73,7 @@ public class SingleQuery {
             for (int i = 0;i < query.covered.size();i++){
                 query.dataSize += query.covered.get(i).dataVolume;
             }
-            int []delay = SingleRun.run(query.arr,query);
+            int []delay = SingleRunner.run(query.arr,query);
             if (sum < delay[0]){
                 sum = delay[0];
             }

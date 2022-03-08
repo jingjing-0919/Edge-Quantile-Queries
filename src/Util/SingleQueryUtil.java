@@ -191,7 +191,7 @@ public class SingleQueryUtil {
     }
 
 
-    public static double calculateMiniError(Cell cell) {
+    public static double getMiniError(Cell cell) {
         ArrayList<BaseStation> arr = cell.arr;
         double z = 1;
         for (BaseStation baseStation : arr) {

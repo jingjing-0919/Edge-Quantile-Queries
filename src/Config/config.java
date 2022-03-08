@@ -1,6 +1,21 @@
 package Config;
 
 public class config {
+    /*
+       default setting:
+          Method = "CB"
+          DataFile = "./Resources/Data/SyntheticData/synthetic_data_sample_2m.txt"
+          BaseStationFile = "./Resources/BaseStation/BaseStations16.txt"
+          QueryFile = "./Resources/Query/Query50.txt"
+          Alpha = 1.0
+          Cell_length = 1000
+          dataVolume = 1000000
+          x_length = 5000   // do not change this
+          y_length = 5000   // do not change this
+          relaxRate = 0.2
+          RelaxMethod = "minMax"
+     */
+
 
     public static String Method = "CB";
     /* choose from all the baseline we have:
@@ -8,10 +23,12 @@ public class config {
        ["QW", "CB", "CB-I", "CB-E", "CB-R", "CP"] for ConcurrentQuery
     */
 
+
+
     public static String DataFile = "./Data/geolife1.txt";
 
-    public static String BaseStationFile = "./Data/baseStations16.txt";
-    /* choose from "./src/Data/baseStations16.txt" or "./src/Data/baseStations24.txt" or "./src/Data/baseStations32.txt"
+    public static String BaseStationFile = "./Data/BaseStations16.txt";
+    /* choose from "./src/Data/BaseStations16.txt" or "./src/Data/BaseStations24.txt" or "./src/Data/BaseStations32.txt"
        to decide the number of baseStations
      */
 
@@ -36,6 +53,11 @@ public class config {
     public static int x_length = 5000;
     public static int y_length = 5000;
 
-    public static double relaxRate = 0.2;
+    public static double RelaxRate = 0.2;
+
+    public static String RelaxMethod = "minMax";
+    /*
+        choose from ["minMax", "minAvg"]
+     */
 
 }
