@@ -14,6 +14,9 @@ import Config.config;
 
 
 public class SingleQueryUtil {
+    public static int x_length = 5000;
+    public static int y_length = 5000;
+
     public static void initBaseStation(ArrayList<BaseStation> baseStations){
         String csvFile = config.BaseStationFile;
         BufferedReader br = null;
@@ -85,8 +88,6 @@ public class SingleQueryUtil {
     }
 
     public static void initCell(ArrayList<Cell> cells){
-        int x_length = config.x_length;
-        int y_length = config.y_length;
         int Cell_length = config.Cell_length;
         int numberOfGrid_x = x_length / Cell_length;
         int numberOfGrid_y = y_length / Cell_length;

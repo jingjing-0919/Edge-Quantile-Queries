@@ -136,7 +136,7 @@ public class SingleRunner {
         for (int i = 0; i < arr.size(); i++) {
             set[i] = 0;
         }
-        arr.sort(Comparator.comparingDouble(BaseStation::getId));//使之有序
+        arr.sort(Comparator.comparingDouble(BaseStation::getId));
         for (int i = 0; i < arr.size(); i++) {
             upper[i] = computeDataUpperBound(errorBound, arr, i);
         }
@@ -171,7 +171,7 @@ public class SingleRunner {
     }
 
 
-    public static double[] dataReDistributionUTCFirst(ArrayList<BaseStation> arr, double errorBound, double[] upper) {  //多出来的放到UTC最小的去
+    public static double[] dataReDistributionUTCFirst(ArrayList<BaseStation> arr, double errorBound, double[] upper) {
         int[] set = new int[arr.size()];
         for (int i = 0; i < arr.size(); i++) {
             set[i] = 0;
@@ -216,7 +216,7 @@ public class SingleRunner {
     }
 
 
-    public static double[] dataReDistributionEpsFirst(ArrayList<BaseStation> arr, double errorBound, double[] upper) {  //多出来的放到Eps最小的去
+    public static double[] dataReDistributionEpsFirst(ArrayList<BaseStation> arr, double errorBound, double[] upper) {
         int[] set = new int[arr.size()];
         for (int i = 0; i < arr.size(); i++) {
             set[i] = 0;
@@ -224,7 +224,7 @@ public class SingleRunner {
         double eta = 1;
         double[] eta_final = new double[arr.size()];
         double z = 0;
-        arr.sort(Comparator.comparingDouble(BaseStation::getE));//使之有序
+        arr.sort(Comparator.comparingDouble(BaseStation::getE));
         for (int i = 0; i < arr.size(); i++) {
             upper[i] = computeDataUpperBound(errorBound, arr, i);
         }
@@ -261,12 +261,12 @@ public class SingleRunner {
     }
 
 
-    public static double[] dataReDistributionRandom(ArrayList<BaseStation> arr, double errorBound, double[] upper) {  //多出来的随机放
+    public static double[] dataReDistributionRandom(ArrayList<BaseStation> arr, double errorBound, double[] upper) {
         int[] set = new int[arr.size()];
         for (int i = 0; i < arr.size(); i++) {
             set[i] = 0;
         }
-        arr.sort(Comparator.comparingDouble(BaseStation::getLatitude));//使之有序
+        arr.sort(Comparator.comparingDouble(BaseStation::getLatitude));
         for (int i = 0; i < arr.size(); i++) {
             upper[i] = computeDataUpperBound(errorBound, arr, i);
         }
@@ -322,12 +322,12 @@ public class SingleRunner {
     }
 
 
-    public static double[] dataReDistributionOEP(ArrayList<BaseStation> arr, double errorBound, double[] upper) {  //多出来的随机放
+    public static double[] dataReDistributionOEP(ArrayList<BaseStation> arr, double errorBound, double[] upper) {
         int[] set = new int[arr.size()];
         for (int i = 0; i < arr.size(); i++) {
             set[i] = 0;
         }
-        arr.sort(Comparator.comparingDouble(BaseStation::getLongitude));//使之有序
+        arr.sort(Comparator.comparingDouble(BaseStation::getLongitude));
         for (int i = 0; i < arr.size(); i++) {
             upper[i] = computeDataUpperBound(errorBound, arr, i);
         }

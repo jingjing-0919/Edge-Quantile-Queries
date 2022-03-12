@@ -1,6 +1,7 @@
 package Experiment;
 
 import java.io.*;
+import java.net.Socket;
 import java.util.*;
 import Config.config;
 import Model.BaseStation;
@@ -8,6 +9,7 @@ import Model.Cell;
 import Model.Query;
 import Util.SingleQueryUtil;
 import Util.ConcurrentQueryUtil;
+import Socket.Controller;
 
 public class ConcurrentQuery {
 
@@ -181,45 +183,50 @@ public class ConcurrentQuery {
             bw1.close();
             long sumMem = 0;
 
-            //run GK algorithm for cells
-            for (Cell cell : cells) {
-                if (cell.set.size() != 0){
-                    cell.quantile = ConcurrentQueryUtil.execute(cell, cell.getId(), cell.arr, cell.eta, cell.dataVolume, config.DataFile);
-                    long end_total = r.totalMemory();
-                    long end_free = r.freeMemory();
-                    long mem = ((end_total- end_free) - (start_total - start_free))/1024/1024;
-                    sumMem += mem;
-                    //System.out.println(mem);
-                }
-            }
-            int sum = 0;
-            BufferedWriter bw = new BufferedWriter(new FileWriter("./src/TestResultLog/ConcurrentQueryTestResult.txt", true));
-            for (Query query:queries){
-                ArrayList<Cell> grids1 = query.covered;
-                int delay = 0;
-                for (Cell cell : grids1) {
-                    if (delay < cell.delay) {
-                        delay = (int) cell.delay;
+            if (!config.useSocket){
+                //run GK algorithm for cells
+                for (Cell cell : cells) {
+                    if (cell.set.size() != 0){
+                        cell.quantile = ConcurrentQueryUtil.execute(cell, cell.getId(), cell.arr, cell.eta, cell.dataVolume, config.DataFile);
+                        long end_total = r.totalMemory();
+                        long end_free = r.freeMemory();
+                        long mem = ((end_total- end_free) - (start_total - start_free))/1024/1024;
+                        sumMem += mem;
+                        //System.out.println(mem);
                     }
                 }
-                sum = sum + delay;
+                int sum = 0;
+                BufferedWriter bw = new BufferedWriter(new FileWriter("./src/TestResultLog/ConcurrentQueryTestResult.txt", true));
+                for (Query query:queries){
+                    ArrayList<Cell> grids1 = query.covered;
+                    int delay = 0;
+                    for (Cell cell : grids1) {
+                        if (delay < cell.delay) {
+                            delay = (int) cell.delay;
+                        }
+                    }
+                    sum = sum + delay;
+//------------------------------------------log_start-------------------------------------------------------------------
+                    bw.write(" \r\n");
+                    bw.write("\r\n");
+                    if(query.error > query.getErrorBound()){
+                        bw.write("QueryID: "+ query.id+"   delay: " + delay+ "   error: "+ query.getErrorBound()+"   errorBound: "+query.getErrorBound());
+                    }else {
+                        bw.write("QueryID: "+ query.id+"   delay: " + delay+ "   error: "+ query.error+"   errorBound: "+query.getErrorBound());
+                    }
+//------------------------------------------log_end-------------------------------------------------------------------
+                }
 //------------------------------------------log_start-------------------------------------------------------------------
                 bw.write(" \r\n");
                 bw.write("\r\n");
-                if(query.error > query.getErrorBound()){
-                    bw.write("QueryID: "+ query.id+"   delay: " + delay+ "   error: "+ query.getErrorBound()+"   errorBound: "+query.getErrorBound());
-                }else {
-                    bw.write("QueryID: "+ query.id+"   delay: " + delay+ "   error: "+ query.error+"   errorBound: "+query.getErrorBound());
-                }
+                bw.write("QueryAvgDelay: "+ sum/queries.size());
+                bw.write("Sum Mem: "+sumMem);
+                bw.close();
 //------------------------------------------log_end-------------------------------------------------------------------
             }
-//------------------------------------------log_start-------------------------------------------------------------------
-            bw.write(" \r\n");
-            bw.write("\r\n");
-            bw.write("QueryAvgDelay: "+ sum/queries.size());
-            bw.write("Sum Mem: "+sumMem);
-            bw.close();
-//------------------------------------------log_end-------------------------------------------------------------------
+            else {
+                Controller.sendMessage(cells);
+            }
         }
     }
 }

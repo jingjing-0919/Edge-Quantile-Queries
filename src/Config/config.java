@@ -10,10 +10,9 @@ public class config {
           Alpha = 1.0
           Cell_length = 1000
           dataVolume = 1000000
-          x_length = 5000   // do not change this
-          y_length = 5000   // do not change this
           relaxRate = 0.2
           RelaxMethod = "minMax"
+          useSocket = false
      */
 
 
@@ -50,14 +49,12 @@ public class config {
        when Cell_length = 250, there are 400 cells in total, for UN = 25M, dataVolume = 62500;
      */
 
-    public static int x_length = 5000;
-    public static int y_length = 5000;
-
     public static double RelaxRate = 0.2;
 
     public static String RelaxMethod = "minMax";
     /*
         choose from ["minMax", "minAvg"]
      */
+    public static boolean useSocket = false;
 
 }

@@ -9,7 +9,7 @@ import Model.BaseStation;
 import Model.Cell;
 
 public class ConcurrentRunner {
-    public static ArrayList<Integer> run (Cell cell, BaseStation baseStation, int size, String csvFile, double phi, int start_time) throws IOException {
+    public static ArrayList<Integer> run (BaseStation baseStation, int size, String csvFile, double phi, int start_time) throws IOException {
 
         double e = baseStation.getE();
         int n = 0;//current number of summary

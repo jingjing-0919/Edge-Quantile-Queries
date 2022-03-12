@@ -26,7 +26,7 @@ public class ConcurrentQueryUtil {
         int delayMax = 0;
         for (BaseStation baseStation : arr) {
             if (eta.get(baseStation) != 0.0){
-                ArrayList<Integer> arrayList = ConcurrentRunner.run(cell,baseStation, (int) (dataSize * eta.get(baseStation)), csvFile1, 0.5, (int) temp * dataSize);
+                ArrayList<Integer> arrayList = ConcurrentRunner.run(baseStation, (int) (dataSize * eta.get(baseStation)), csvFile1, 0.5, (int) temp * dataSize);
                 int index = arrayList.size()-1;
                 int delay = arrayList.get(index);
                 arrayList.remove(index);

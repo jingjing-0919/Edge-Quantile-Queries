@@ -8,6 +8,7 @@ public class BaseStation {
     private int longitude;
     private int latitude;
     private int radius;
+    private String ipAddress;
 
 
     public BaseStation(double e,double UTC,int id,int delayPer100,int longitude,int latitude,int radius){
@@ -18,6 +19,7 @@ public class BaseStation {
         this.longitude = longitude;
         this.latitude = latitude;
         this.radius = radius;
+        this.ipAddress = "";
 
     }
 
@@ -49,5 +51,13 @@ public class BaseStation {
 
     public int getRadius() {
         return radius;
+    }
+
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
     }
 }
