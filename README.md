@@ -1,9 +1,11 @@
+<div id="badges">
 <img src="https://img.shields.io/badge/build-passing-green" />
 <img src="https://img.shields.io/badge/license-MIT-green" />
 <img src="https://img.shields.io/badge/version-0.2-blue" />
 <img src="https://img.shields.io/badge/java-%3E%3D12-blue" />
 <img src="https://img.shields.io/badge/code--size-74.1%20KB-yellowgreen" />
 <img src="https://img.shields.io/badge/data--size-48.5%20MB-yellowgreen" />
+</div>
 
 # Edge-Quantile-Queries
 
