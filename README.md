@@ -189,7 +189,7 @@ the results with similar trends as reported in our paper.
 
 ## Contributors
 
-<img src="Resources/Results/logo.fw.png" style="width:400px"/>
+<img src="Resources/Results/logo.fw.png" style="width:400px; border:1px solid grey;"/>
 
 This is a joint work by AAU (Denmark), SUSTech (China), and RUC (Denmark).
 
