@@ -97,7 +97,7 @@ The configurable parameters are listed below.
 
 ```java
     /* the baseline methods:
-       ["DFE", "NDFE", "EDFE", "LDFE", "SDFE", "BTA"] for singleQuery
+       ["DFE", "NDFE", "EDFE", "LDFE", "SDFE", "BTA"] for SingleQuery
        ["QW", "CB", "CB-I", "CB-E", "CB/R", "CP"] for ConcurrentQuery
     */
     public static String Method = "CB";
