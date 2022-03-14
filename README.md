@@ -1,4 +1,11 @@
-# <a href="https://msca-malot.github.io/" target="_blank"><img src="https://msca-malot.github.io/images/logo-wide.png" style="width:75px;"/></a>&nbsp;&nbsp; Edge-Quantile-Queries
+<img src="https://img.shields.io/badge/build-passing-green" />
+<img src="https://img.shields.io/badge/license-MIT-green" />
+<img src="https://img.shields.io/badge/version-0.2-blue" />
+<img src="https://img.shields.io/badge/java-%3E%3D12-blue" />
+<img src="https://img.shields.io/badge/code--size-74.1%20KB-yellowgreen" />
+<img src="https://img.shields.io/badge/data--size-48.5%20MB-yellowgreen" />
+
+# Edge-Quantile-Queries
 
 ## Introduction
 
@@ -235,8 +242,12 @@ deployment.
 
 This is a joint work by AAU (Denmark), SUSTech (China), and RUC (Denmark).
 
-- Lanjing Yi constructed the project and implemented the query processing algorithms.
-- Xinle Jiang created the real mobility dataset for experiments.
+- [Lanjing Yi]() constructed the project and implemented the query processing algorithms.
+- [Xinle Jiang]() created the real mobility dataset for experiments.
+
+<img src="https://msca-malot.github.io/images/logo-wide.png" style="width:400px; border:1px solid grey;"/>
+
+This is a research work under <a href="https://msca-malot.github.io/" target="_blank">MSCA MALOT</a> project.
 
 ## Citation
 
