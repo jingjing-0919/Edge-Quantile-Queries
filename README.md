@@ -19,6 +19,12 @@ by @[WladimirLivolis](https://github.com/WladimirLivolis/GreenwaldKhanna/commits
 
 ## Get Started
 
+A roadmap is here:
+- [Prerequisites and Dependencies](#prerequisites-and-dependencies)
+- [Project Structure](#project-structure)
+- [How to Configure](#how-to-configure)
+- [How to Execute](#how-to-execute)
+
 ### Prerequisites and Dependencies
 
 The code is implemented in Java 12, without external libraries used.
@@ -79,45 +85,11 @@ Edge-Quantile-Queries
 ┗ README.md
 ```
 
-### How to Execute
-
-Once the project is imported in the IDE, you can run the experiments from `/src/Experiment/Entrance.java` as follows.
-
-```java
-public class Entrance {
-    public static void main(String[] args) throws IOException {
-        if (config.Method.equals("DFE") || config.Method.equals("EDFE") || config.Method.equals("LDFE") ||
-                config.Method.equals("NDFE") || config.Method.equals("SDFE") || config.Method.equals("BTA")){
-            SingleQuery.SingleQueryRun(); // processing queries individually
-        }
-        else {
-            ConcurrentQuery.ConcurrentQueryRun(); // processing queries concurrently
-        }
-    }
-}
-```
-
-The repository contains a good number of algorithms for comparisons, which are described as follows.
-- For individual query processing
-  - DFE: data fraction estimation (algorithm 1 proposed in our paper).
-  - NDFE: each allocated sketch takes the original data volume when processing a query.
-  - EDFE: when a saturated sketch is found, its excess data fraction is undertaken by an unsaturated sketch with the minimum approximation error; this procedure is repeated until no new sketch becomes saturated.
-  - LDFE: differs from EDFE in that the excess data fraction is always undertaken by an unsaturated sketch with the minimum UL.
-  - SDFE: the excess data fraction is undertaken by a randomly selected unsaturated sketch.
-  - BTA: all data is forwarded for processing to the best sketch with the minimum UL in { s_i \in S(q) \mid \epsilon_i \leq b }.
-- For concurrent query processing
-  - CB: cell-based mechanism proposed in our paper.
-  - QW: a set of sketches is allocated for each concurrent query.
-  - CB-I/CB-E: each query always includes/excludes all its ICs in approximation.
-  - CB/R: the error bound of the current bottleneck cell is set directly to the minimum error bound of its relevant queries; this is repeated when the current bottleneck cell cannot be tuned due to the error bounding restriction.
-  - CP: sketches are allocated for each divided cell and are gathered at a centralized processing node that processes each query in parallel by merging a corresponding set of gathered sketches. To ease the management of sketches, a unified approximation error is employed that satisfies the strictest error bound among all queries.
-
-
-The configuration of experiment parameters is introduced below.
-
 ### How to Configure
 
-Edit `/src/Config/config.java` for changing experimental settings. The configurable parameters are listed below.
+Once the project is imported in the IDE, you can edit 
+`/src/Config/config.java` for changing experimental settings. 
+The configurable parameters are listed below.
 
 ```java
     /* the baseline methods:
@@ -162,7 +134,60 @@ Edit `/src/Config/config.java` for changing experimental settings. The configura
     public static String RelaxMethod = "minMax";
 ```
 
-### Results and Findings
+The repository contains a good number of algorithms for comparisons, which are described as follows.
+- For individual query processing
+  - DFE: data fraction estimation (algorithm 1 proposed in our paper).
+  - NDFE: each allocated sketch takes the original data volume when processing a query.
+  - EDFE: when a saturated sketch is found, its excess data fraction is undertaken by an unsaturated sketch with the minimum approximation error; this procedure is repeated until no new sketch becomes saturated.
+  - LDFE: differs from EDFE in that the excess data fraction is always undertaken by an unsaturated sketch with the minimum UL.
+  - SDFE: the excess data fraction is undertaken by a randomly selected unsaturated sketch.
+  - BTA: all data is forwarded for processing to the best sketch with the minimum UL in { s_i \in S(q) \mid \epsilon_i \leq b }.
+- For concurrent query processing
+  - CB: cell-based mechanism proposed in our paper.
+  - QW: a set of sketches is allocated for each concurrent query.
+  - CB-I/CB-E: each query always includes/excludes all its ICs in approximation.
+  - CB/R: the error bound of the current bottleneck cell is set directly to the minimum error bound of its relevant queries; this is repeated when the current bottleneck cell cannot be tuned due to the error bounding restriction.
+  - CP: sketches are allocated for each divided cell and are gathered at a centralized processing node that processes each query in parallel by merging a corresponding set of gathered sketches. To ease the management of sketches, a unified approximation error is employed that satisfies the strictest error bound among all queries.
+
+### How to Execute
+
+you can run the experiments from `/src/Experiment/Entrance.java` as follows.
+
+```java
+public class Entrance {
+    public static void main(String[] args) throws IOException {
+        if (config.Method.equals("DFE") || config.Method.equals("EDFE") || config.Method.equals("LDFE") ||
+                config.Method.equals("NDFE") || config.Method.equals("SDFE") || config.Method.equals("BTA")){
+            SingleQuery.SingleQueryRun(); // processing queries individually
+        }
+        else {
+            ConcurrentQuery.ConcurrentQueryRun(); // processing queries concurrently
+        }
+    }
+}
+```
+
+The console will output some intermediate results.
+The detailed results will be dumped to the files 
+`/TestResultLog/SingleQueryTestResult.txt` and 
+`/TestResultLog/ConcurrentQueryTestResult.txt`.
+
+A sample is given below:
+```text
+Time cost of dataRedistribution: 90 ms
+ 
+
+GridID: 0
+Model.BaseStation id: 1
+dataSize: 1000000
+GK  cost: 1825ms error: 0.05
+
+...
+```
+
+The configuration of experiment parameters is introduced below.
+
+## Results and Findings
 
 Below we showcase some experimental results we obtained from the code implementation.
 An extensive experimental studies can be found in our paper.
