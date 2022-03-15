@@ -17,7 +17,7 @@ public class SingleQueryUtil {
     public static int x_length = 5000;
     public static int y_length = 5000;
 
-    public static void initBaseStation(ArrayList<BaseStation> baseStations){
+    public static void initBaseStation(ArrayList<BaseStation> baseStations) {
         String csvFile = config.BaseStationFile;
         BufferedReader br = null;
         String line = "";
@@ -35,6 +35,9 @@ public class SingleQueryUtil {
                 int latitude = Integer.parseInt(country[5]);
                 int radius = Integer.parseInt(country[6]);
                 BaseStation baseStation = new BaseStation(e, UTC, id, delay, longitude, latitude, radius);
+                if (config.useSocket) {
+                    baseStation.setIpAddress(country[7]);
+                }
                 baseStations.add(baseStation);
             }
         } catch (IOException e) {
@@ -50,7 +53,7 @@ public class SingleQueryUtil {
         }
     }
 
-    public static void initQuery(ArrayList<Query> queries){
+    public static void initQuery(ArrayList<Query> queries) {
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";
@@ -70,7 +73,7 @@ public class SingleQueryUtil {
                 int y_left = Integer.parseInt(country[5]);
                 int y_right = Integer.parseInt(country[6]);
                 double errorBound = Double.parseDouble(country[7]);
-                Query query = new Query(T, delta_T, x_left, x_right, y_left, y_right, errorBound,id);
+                Query query = new Query(T, delta_T, x_left, x_right, y_left, y_right, errorBound, id);
                 queries.add(query);
             }
         } catch (IOException e) {
@@ -87,7 +90,7 @@ public class SingleQueryUtil {
         }
     }
 
-    public static void initCell(ArrayList<Cell> cells){
+    public static void initCell(ArrayList<Cell> cells) {
         int Cell_length = config.Cell_length;
         int numberOfGrid_x = x_length / Cell_length;
         int numberOfGrid_y = y_length / Cell_length;
@@ -101,7 +104,7 @@ public class SingleQueryUtil {
         }
     }
 
-    public static void CalculateError(ArrayList<Query>checkList){
+    public static void CalculateError(ArrayList<Query> checkList) {
         for (Query cur : checkList) {
             int temp_N = 0;
             double temp_e = 0;
@@ -170,11 +173,11 @@ public class SingleQueryUtil {
 
         int intersectArea = (arrX.get(2) - arrX.get(1)) * (arrY.get(2) - arrY.get(1));
         int irrelevantArea = Cell_length * Cell_length - intersectArea;
-        intersectArea = (intersectArea *100/ (Cell_length * Cell_length))*N/100;
-        irrelevantArea = (irrelevantArea*100 / (Cell_length * Cell_length))*N/100;
+        intersectArea = (intersectArea * 100 / (Cell_length * Cell_length)) * N / 100;
+        irrelevantArea = (irrelevantArea * 100 / (Cell_length * Cell_length)) * N / 100;
 
-        double ErrorIG = (irrelevantArea + cell.error * intersectArea );
-        double ErrorEG = (intersectArea ) ;
+        double ErrorIG = (irrelevantArea + cell.error * intersectArea);
+        double ErrorEG = (intersectArea);
 
 
         if (ErrorEG >= ErrorIG) {
@@ -185,7 +188,7 @@ public class SingleQueryUtil {
     }
 
 
-    public static boolean calculate(Query query,BaseStation baseStation){
+    public static boolean calculate(Query query, BaseStation baseStation) {
         boolean x1 = baseStation.getLongitude() > query.getX_left() && baseStation.getLongitude() < query.getX_right();
         boolean y1 = baseStation.getLatitude() > query.getY_left() && baseStation.getLatitude() < query.getY_right();
         return x1 && y1;
@@ -196,7 +199,7 @@ public class SingleQueryUtil {
         ArrayList<BaseStation> arr = cell.arr;
         double z = 1;
         for (BaseStation baseStation : arr) {
-            if(z > baseStation.getE()){
+            if (z > baseStation.getE()) {
                 z = baseStation.getE();
             }
         }

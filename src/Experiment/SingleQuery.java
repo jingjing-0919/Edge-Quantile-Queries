@@ -8,6 +8,7 @@ import Model.Cell;
 import Model.Query;
 import Util.SingleQueryUtil;
 import Config.config;
+
 public class SingleQuery {
 
     public static void SingleQueryRun() throws IOException {
@@ -25,7 +26,7 @@ public class SingleQuery {
         SingleQueryUtil.initCell(cells);
 
         //find all relative BaseStations for  grids
-        for (Query query:queries) {
+        for (Query query : queries) {
             for (BaseStation baseStation : baseStations) {
                 if (SingleQueryUtil.calculate(query, baseStation)) {
                     query.arr.add(baseStation);
@@ -36,7 +37,7 @@ public class SingleQuery {
         //find Covered Cells and Intersecting Cells for queries
         for (Cell cell : cells) {
             for (Query query : queries) {
-                int c = SingleQueryUtil.check(query, cell) ;
+                int c = SingleQueryUtil.check(query, cell);
                 if (c == 0) {
                     query.covered.add(cell);
                     cell.set.add(query);
@@ -48,7 +49,7 @@ public class SingleQuery {
         //Set the default dataVolume
 
 
-        for (Cell cell : cells){
+        for (Cell cell : cells) {
             cell.dataVolume = config.dataVolume;
         }
 
@@ -57,7 +58,7 @@ public class SingleQuery {
             cell.error = cell.minError;
         }
         // choose to include or exclude Intersecting Cells
-        for (Query query:queries){
+        for (Query query : queries) {
             SingleQueryUtil.checkIG(query);
         }
         // check whether one query can satisfy or not by calculate the error of current state
@@ -67,14 +68,13 @@ public class SingleQuery {
         long sumMem = 0;
 
 
-
-        for (Query query:queries){
+        for (Query query : queries) {
             query.dataSize = 0;
-            for (int i = 0;i < query.covered.size();i++){
+            for (int i = 0; i < query.covered.size(); i++) {
                 query.dataSize += query.covered.get(i).dataVolume;
             }
-            int []delay = SingleRunner.run(query.arr,query);
-            if (sum < delay[0]){
+            int[] delay = SingleRunner.run(query.arr, query);
+            if (sum < delay[0]) {
                 sum = delay[0];
             }
             sumMem = sumMem + delay[1];
@@ -82,8 +82,8 @@ public class SingleQuery {
 
         BufferedWriter bw = new BufferedWriter(new FileWriter("FinalSingleTestResult.txt", true));
         bw.write("\r\n");
-        bw.write("TotalDelay = "+sum);
-        bw.write("TotalMemory = "+sumMem);
+        bw.write("TotalDelay = " + sum);
+        bw.write("TotalMemory = " + sumMem);
         bw.write("\r\n");
         bw.close();
     }

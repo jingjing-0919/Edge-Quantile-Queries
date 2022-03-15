@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class Worker {
     public static ArrayList<BaseStation> baseStations;
+
     public static void main(String[] args) throws IOException {
         baseStations = new ArrayList<>();
         SingleQueryUtil.initBaseStation(baseStations);
@@ -71,9 +72,9 @@ public class Worker {
                 String inputLine;
                 // Wait for input
                 if ((inputLine = in.readLine()) != null) {
-                    String [] split = inputLine.split(",");
-                    ConcurrentRunner.run(baseStations.get(Integer.parseInt(split[0])),Integer.parseInt(split[1]),
-                            split[2],Double.parseDouble(split[3]),Integer.parseInt(split[4]));
+                    String[] split = inputLine.split(",");
+                    ConcurrentRunner.run(baseStations.get(Integer.parseInt(split[0])), Integer.parseInt(split[1]),
+                            split[2], Double.parseDouble(split[3]), Integer.parseInt(split[4]));
 
                 }
                 clientSocket.close();
@@ -113,7 +114,6 @@ public class Worker {
             }
         }
     }
-
 
 
 }

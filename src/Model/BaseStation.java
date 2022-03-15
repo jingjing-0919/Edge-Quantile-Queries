@@ -11,7 +11,7 @@ public class BaseStation {
     private String ipAddress;
 
 
-    public BaseStation(double e,double UTC,int id,int delayPer100,int longitude,int latitude,int radius){
+    public BaseStation(double e, double UTC, int id, int delayPer100, int longitude, int latitude, int radius) {
         this.e = e;
         this.UTC = UTC;
         this.id = id;
@@ -22,7 +22,6 @@ public class BaseStation {
         this.ipAddress = "";
 
     }
-
 
 
     public double getE() {

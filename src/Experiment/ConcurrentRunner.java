@@ -9,7 +9,7 @@ import Model.BaseStation;
 import Model.Cell;
 
 public class ConcurrentRunner {
-    public static ArrayList<Integer> run (BaseStation baseStation, int size, String csvFile, double phi, int start_time) throws IOException {
+    public static ArrayList<Integer> run(BaseStation baseStation, int size, String csvFile, double phi, int start_time) throws IOException {
 
         double e = baseStation.getE();
         int n = 0;//current number of summary
@@ -19,8 +19,8 @@ public class ConcurrentRunner {
         int blocks = 1;
         ArrayList<Block> blist = new ArrayList<Block>(blocks);
         ArrayList<Block> blist_delay = new ArrayList<>(blocks);
-        int[] arr_data = new int[size+2];
-        long[] arr_time = new long [size+2];
+        int[] arr_data = new int[size + 2];
+        long[] arr_time = new long[size + 2];
         int temp = 0;
         BufferedReader br = null;
         String line = "";
@@ -30,7 +30,7 @@ public class ConcurrentRunner {
             br = new BufferedReader(new FileReader(csvFile));
             while ((line = br.readLine()) != null) {
                 // use comma as separator
-                if (start_time <= count && count < start_time + size ){
+                if (start_time <= count && count < start_time + size) {
                     String[] country = line.split(cvsSplitBy);
                     arr_data[temp] = Integer.parseInt(country[0]);
                     arr_time[temp] = Long.parseLong(country[3]);
@@ -51,20 +51,19 @@ public class ConcurrentRunner {
         }
 
         long start = System.currentTimeMillis();
-        if (baseStation.getDelayPer100() == 0){
-            while (n < size){
+        if (baseStation.getDelayPer100() == 0) {
+            while (n < size) {
                 GKWindow.greenwald_khanna_window(n, arr_data[n], size, e, blist);
                 n++;
             }
-        }
-        else {
+        } else {
             while (n < size) {
-                for (int i =0;i <100;i++){
+                for (int i = 0; i < 100; i++) {
                     GKWindow.greenwald_khanna_window(n, arr_data[n], size, e, blist);
                     n++;
                 }
-                for (int i = 0; i < baseStation.getDelayPer100();i++){
-                    GKWindow.greenwald_khanna_window(n_delay,arr_data[n_delay],size_delay,e,blist_delay);
+                for (int i = 0; i < baseStation.getDelayPer100(); i++) {
+                    GKWindow.greenwald_khanna_window(n_delay, arr_data[n_delay], size_delay, e, blist_delay);
                 }
             }
         }
@@ -72,15 +71,15 @@ public class ConcurrentRunner {
         ArrayList<Integer> quantile = GKWindow.quantile(phi, n, e, blist);
 
 //------------------------------------------log_start-------------------------------------------------------------------
-        BufferedWriter bw = new BufferedWriter(new FileWriter("./TestResultLog/ConcurrentQueryTestResult.txt",true));
+        BufferedWriter bw = new BufferedWriter(new FileWriter("./TestResultLog/ConcurrentQueryTestResult.txt", true));
         bw.write("\n");
-        bw.write("Model.BaseStation id: "+ baseStation.getId()+"\n");
-        bw.write("dataSize: "+size+ "\n");
-        bw.write("GK  cost: "+ (end - start) + "ms"+ " error: "+ e + "\n");
+        bw.write("Model.BaseStation id: " + baseStation.getId() + "\n");
+        bw.write("dataSize: " + size + "\n");
+        bw.write("GK  cost: " + (end - start) + "ms" + " error: " + e + "\n");
         bw.close();
 //------------------------------------------log_end---------------------------------------------------------------------
 
-        quantile.add((int) (end-start));
+        quantile.add((int) (end - start));
         return quantile;
     }
 }

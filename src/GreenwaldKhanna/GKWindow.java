@@ -27,16 +27,15 @@ public class GKWindow {
             blockList.remove(0);
         }
 
-        Block under_construction = blockList.get(blockList.size()-1);
+        Block under_construction = blockList.get(blockList.size() - 1);
 
-        GK.greenwald_khanna(under_construction.numObs(), v, under_construction.summary(), e/2);
+        GK.greenwald_khanna(under_construction.numObs(), v, under_construction.summary(), e / 2);
 
         under_construction.incrNumObs();
 
     }
 
     public static ArrayList<Integer> quantile(double phi, int w, double e, ArrayList<Block> blist) {
-
 
 
         ArrayList<Tuple> summary = blist.get(0).summary();
@@ -85,12 +84,12 @@ public class GKWindow {
         int rmin, rmax, g, d;
 
         Tuple xr = s1.get(i), ys, yt;
-        updateRanks(i,s1);
+        updateRanks(i, s1);
 
         /* ys is the largest element in S2 that is smaller than xr */
         if (j > 0) {
-            ys = s2.get(j-1);
-            updateRanks(j-1,s2);
+            ys = s2.get(j - 1);
+            updateRanks(j - 1, s2);
         } else {
             ys = null;
         }
@@ -98,7 +97,7 @@ public class GKWindow {
         /* yt is the smallest element in S2 that is larger than xr */
         if (j < s2.size()) {
             yt = s2.get(j);
-            updateRanks(j,s2);
+            updateRanks(j, s2);
         } else {
             yt = null;
         }
@@ -107,7 +106,8 @@ public class GKWindow {
             rmin = xr.getRmin();
         } else {
             rmin = xr.getRmin() + ys.getRmin();
-        } if (yt == null) {
+        }
+        if (yt == null) {
             rmax = xr.getRmax() + ys.getRmax();
         } else {
             rmax = xr.getRmax() + yt.getRmax() - 1;
@@ -115,21 +115,21 @@ public class GKWindow {
 
         /* Optimization: value merging */
         if (k > 0) {
-            if (xr.getVal() == s.get(k-1).getVal()) {
-                rmin = s.get(k-1).getRmin();
+            if (xr.getVal() == s.get(k - 1).getVal()) {
+                rmin = s.get(k - 1).getRmin();
                 k--;
                 s.remove(k);
             }
         }
 
         if (k > 0) {
-            g = rmin - s.get(k-1).getRmin();
+            g = rmin - s.get(k - 1).getRmin();
         } else {
             g = rmin;
         }
         d = rmax - rmin;
 
-        Tuple t = new Tuple(xr.getVal(),g,d);
+        Tuple t = new Tuple(xr.getVal(), g, d);
         t.setRmin(rmin);
         t.setRmax(rmax);
         s.add(k, t);
@@ -141,7 +141,7 @@ public class GKWindow {
         if (pos == 0) {
             rmin = t.getG();
         } else {
-            rmin = t.getG() + s.get(pos-1).getRmin();
+            rmin = t.getG() + s.get(pos - 1).getRmin();
         }
         rmax = t.getD() + rmin;
         t.setRmin(rmin);

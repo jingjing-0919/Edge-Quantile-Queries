@@ -14,15 +14,14 @@ public class Cell {
     public ArrayList<Query> set;
     public double error;
     public double delay;
-    public HashMap<BaseStation,Double> eta;
+    public HashMap<BaseStation, Double> eta;
     public int temp_dataVolume;
     public double minError;
     public ArrayList<Integer> quantile;
     public ArrayList<Cell> transferable;
 
 
-
-    public Cell(int x_left, int x_right, int y_left, int y_right, int id){
+    public Cell(int x_left, int x_right, int y_left, int y_right, int id) {
         this.arr = new ArrayList<>();
         this.x_left = x_left;
         this.x_right = x_right;

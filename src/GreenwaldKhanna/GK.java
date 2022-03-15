@@ -20,7 +20,7 @@ public class GK {
         ArrayList<Integer> quantile = new ArrayList<Integer>(1);
         int index = 1;
         double en = e * n;
-        int r0 = (int) Math.ceil((e/2) * (n - 1));
+        int r0 = (int) Math.ceil((e / 2) * (n - 1));
         int upper = (int) Math.ceil(2.0 / e);
         int r = r0;
         int rmin = 0, rmax;
@@ -33,7 +33,7 @@ public class GK {
                 index++;
             }
         }
-        quantile.add(s.get(s.size()-1).getVal());
+        quantile.add(s.get(s.size() - 1).getVal());
         return quantile;
     }
 
@@ -61,7 +61,7 @@ public class GK {
 
     }
 
-    private static int getPosition(ArrayList<Tuple> s, int v){
+    private static int getPosition(ArrayList<Tuple> s, int v) {
         return 1;
 
     }

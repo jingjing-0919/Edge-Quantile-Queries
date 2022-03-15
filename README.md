@@ -47,12 +47,14 @@ Edge-Quantile-Queries
 ┃ ┣ BaseStation
 ┃ ┃ ┣ BaseStations16.txt
 ┃ ┃ ┣ BaseStations24.txt
-┃ ┃ ┗ BaseStations32.txt
+┃ ┃ ┣ BaseStations32.txt
+┃ ┃ ┗ BaseStations_Socket.txt
 ┃ ┣ Data
 ┃ ┃ ┣ RealMobilityData
 ┃ ┃ ┃ ┗ geolife1.txt
 ┃ ┃ ┗ SyntheticData
-┃ ┃ ┃ ┗ synthetic_data_sample_2m.txt
+┃ ┃ ┃ ┣ synthetic_data_sample_2m.txt
+┃ ┃ ┃ ┗ synthetic_data_sample_25m.txt
 ┃ ┗ Query
 ┃ ┃ ┣ Query30.txt
 ┃ ┃ ┣ Query40.txt
@@ -105,14 +107,14 @@ The configurable parameters are listed below.
     public static String Method = "CB";
     
     /* the number of base stations:
-       "./src/Data/BaseStations[16|24|32].txt"
+       "./Resources/BaseStation/BaseStations[16|24|32].txt"
     */
-    public static String BaseStationFile = "./Data/BaseStations16.txt";
+    public static String BaseStationFile = "./Resources/BaseStation/BaseStations16.txt";
     
     /* the number of base stations:
-       "./src/Data/Query[30|40|50|60].txt"
+       "./Resources/Query/Query[30|40|50|60].txt"
      */
-    public static String QueryFile = "./Data/Query50.txt";
+    public static String QueryFile = "./Resources/Query/Query50.txt";
     
     /* the error bound strictness \alpha
        [0.8, 0.9, 1.0, 1.1, 1.2]
@@ -129,7 +131,7 @@ The configurable parameters are listed below.
        when Cell_length = 500, there are 100 cells in total, for UN = 25M, dataVolume = 250000;
        when Cell_length = 250, there are 400 cells in total, for UN = 25M, dataVolume = 62500;
      */
-    public static int dataVolume = 500000;
+    public static int dataVolume = 1000000;
 
     /* relaxing factor
      */
@@ -138,6 +140,17 @@ The configurable parameters are listed below.
     /* reserach project objective: minMax or minAvg
      */
     public static String RelaxMethod = "minMax";
+
+    /* excute code on single machine or multiple machine 
+     !!! notice: if you want to excute code on multiple machine,you should do as follow:
+     (1) change useSocet = True
+     (2) change BaseStationFile = "./Resources/BaseStation/BaseStations_Socket.txt"
+     (3) use default parameters for others
+     (3) set the ip_address in "./Resources/BaseStation/BaseStations_Socket.txt"
+     (4) run  ./src/Socket/Worker on every machine
+     (5) run  ./src/Experiment/Entrance.java on one machine
+     */
+    public static boolean useSocket = false;
 ```
 
 The repository contains a good number of algorithms for comparisons, which are described as follows.

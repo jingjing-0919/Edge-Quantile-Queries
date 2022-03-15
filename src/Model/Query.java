@@ -9,7 +9,7 @@ public class Query {
 
     private int delta_t;
     private int x_left;
-    private int T ;
+    private int T;
     private int x_right;
     private int y_left;
     private int y_right;
@@ -24,7 +24,7 @@ public class Query {
     public ArrayList<BaseStation> arr;
 
 
-    public Query(int T,int delta_t, int x_left,int x_right,int y_left,int y_right,double errorBound,int id){
+    public Query(int T, int delta_t, int x_left, int x_right, int y_left, int y_right, double errorBound, int id) {
         this.T = T;
         this.delta_t = delta_t;
         this.x_left = x_left;
