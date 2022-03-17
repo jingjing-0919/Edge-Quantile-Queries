@@ -16,14 +16,14 @@ public class config {
      */
 
 
-    public static String Method = "LDFE";
+    public static String Method = "CB";
     /* choose from all the baseline we have:
        ["DFE", "NDFE", "EDFE", "LDFE", "SDFE", "BTA"] for singleQuery
        ["QW", "CB", "CB-I", "CB-E", "CB-R", "CP"] for ConcurrentQuery
     */
 
 
-    public static String DataFile = "./Resources/Data/SyntheticData/synthetic_data_sample_25m.txt";
+    public static String DataFile = "./Resources/Data/SyntheticData/synthetic_data_sample_2m.txt";
     /*
         "./Resources/Data/SyntheticData/synthetic_data_sample_2m.txt" for ConcurrentQuery
         "./Resources/Data/SyntheticData/synthetic_data_sample_25m.txt" for SingleQuery
