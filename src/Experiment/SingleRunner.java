@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import Config.config;
+import Util.SingleQueryUtil;
 
 
 public class SingleRunner {
@@ -25,13 +26,13 @@ public class SingleRunner {
         double[] upper_SDFE = new double[arr.size()];
         double[] upper_NDFE = new double[arr.size()];
         for (int i = 0; i < arr.size(); i++) {
-            upper_DFE[i] = computeDataUpperBound(errorBound, arr, i);
+            upper_DFE[i] = SingleQueryUtil.computeDataUpperBound(errorBound, arr, i);
         }
-        double[] eta = dataReDistribution(arr, errorBound, upper_DFE);
-        double[] eta_EPS = dataReDistributionEpsFirst(arr, errorBound, upper_EDFE);
-        double[] eta_UTC = dataReDistributionUTCFirst(arr, errorBound, upper_LDFE);
-        double[] eta_Random = dataReDistributionRandom(arr, errorBound, upper_SDFE);
-        double[] eta_OEP = dataReDistributionOEP(arr, errorBound, upper_NDFE);
+        double[] eta_DFE = dataReDistribution_DFE(arr, errorBound, upper_DFE);
+        double[] eta_EDFE = dataReDistribution_EDFE(arr, errorBound, upper_EDFE);
+        double[] eta_LDFE = dataReDistribution_LDFE(arr, errorBound, upper_LDFE);
+        double[] eta_SDFE = dataReDistribution_SDFE(arr, errorBound, upper_SDFE);
+        double[] eta_NDFE = dataReDistribution_NDFE(arr, errorBound, upper_NDFE);
         double[] eta_BTA = dataReDistribution_BTA(arr, errorBound);
 
         int dataSize = query.dataSize;
@@ -40,19 +41,19 @@ public class SingleRunner {
         int[] delay;
         switch (config.Method) {
             case "DFE":
-                delay = execute(arr, eta, upper_DFE, dataSize, dataFile, 1);
+                delay = execute(arr, eta_DFE, upper_DFE, dataSize, dataFile, 1);
                 break;
             case "EDFE":
-                delay = execute(arr, eta_EPS, upper_EDFE, dataSize, dataFile, 2);
+                delay = execute(arr, eta_EDFE, upper_EDFE, dataSize, dataFile, 2);
                 break;
             case "LDFE":
-                delay = execute(arr, eta_UTC, upper_LDFE, dataSize, dataFile, 3);
+                delay = execute(arr, eta_LDFE, upper_LDFE, dataSize, dataFile, 3);
                 break;
             case "SDFE":
-                delay = execute(arr, eta_Random, upper_SDFE, dataSize, dataFile, 4);
+                delay = execute(arr, eta_SDFE, upper_SDFE, dataSize, dataFile, 4);
                 break;
             case "NDFE":
-                delay = execute(arr, eta_OEP, upper_NDFE, dataSize, dataFile, 5);
+                delay = execute(arr, eta_NDFE, upper_NDFE, dataSize, dataFile, 5);
                 break;
             case "BTA":
                 delay = execute(arr, eta_BTA, upper_DFE, dataSize, dataFile, 6);
@@ -132,14 +133,11 @@ public class SingleRunner {
         return eta;
     }
 
-    public static double[] dataReDistribution(ArrayList<BaseStation> arr, double errorBound, double[] upper) {
+    public static double[] dataReDistribution_DFE(ArrayList<BaseStation> arr, double errorBound, double[] upper) {
         int[] set = new int[arr.size()];
-        for (int i = 0; i < arr.size(); i++) {
-            set[i] = 0;
-        }
         arr.sort(Comparator.comparingDouble(BaseStation::getId));
         for (int i = 0; i < arr.size(); i++) {
-            upper[i] = computeDataUpperBound(errorBound, arr, i);
+            upper[i] = SingleQueryUtil.computeDataUpperBound(errorBound, arr, i);
         }
         double eta = 1;
         double[] eta_final = new double[arr.size()];
@@ -172,202 +170,28 @@ public class SingleRunner {
     }
 
 
-    public static double[] dataReDistributionUTCFirst(ArrayList<BaseStation> arr, double errorBound, double[] upper) {
-        int[] set = new int[arr.size()];
-        for (int i = 0; i < arr.size(); i++) {
-            set[i] = 0;
-        }
-        double eta = 1;
-        double[] eta_final = new double[arr.size()];
-        double z = 0;
-        arr.sort(Comparator.comparingDouble(BaseStation::getUTC));//使之有序
-        for (int i = 0; i < arr.size(); i++) {
-            upper[i] = computeDataUpperBound(errorBound, arr, i);
-        }
-        for (int i = 0; i < arr.size(); i++) {
-            if (set[i] == 0) {
-                z = z + 1 / arr.get(i).getUTC();
-            }
-        }
-        for (int i = 0; i < arr.size(); i++) {
-            if (set[i] == 0) {
-                double eta_i = Math.round(100 / (arr.get(i).getUTC() * z)) / 100.0;
-                if (arr.get(i).getE() > errorBound && eta_i > upper[i]) {
-                    eta_final[i] = upper[i];
-                    set[i] = 1;
-                    eta = eta - upper[i];
-                } else {
-                    eta_final[i] = eta_i;
-                    eta = eta - eta_i;
-                }
-            }
-        }
-        for (int i = 0; i < arr.size(); i++) {
-            if (set[i] == 0 && eta > 0) {
-                if (eta <= upper[i] - eta_final[i]) {
-                    eta_final[i] = eta_final[i] + eta;
-                    eta = 0;
-                } else {
-                    eta = eta - upper[i] + eta_final[i];
-                    eta_final[i] = upper[i];
-                }
-            }
-        }
-        return eta_final;
+    public static double[] dataReDistribution_LDFE(ArrayList<BaseStation> arr, double errorBound, double[] upper) {
+        return SingleQueryUtil.getDoubles(arr, errorBound, upper, Comparator.comparingDouble(BaseStation::getUTC));
     }
 
 
-    public static double[] dataReDistributionEpsFirst(ArrayList<BaseStation> arr, double errorBound, double[] upper) {
-        int[] set = new int[arr.size()];
-        for (int i = 0; i < arr.size(); i++) {
-            set[i] = 0;
-        }
-        double eta = 1;
-        double[] eta_final = new double[arr.size()];
-        double z = 0;
-        arr.sort(Comparator.comparingDouble(BaseStation::getE));
-        for (int i = 0; i < arr.size(); i++) {
-            upper[i] = computeDataUpperBound(errorBound, arr, i);
-        }
-        for (int i = 0; i < arr.size(); i++) {
-            if (set[i] == 0) {
-                z = z + 1 / arr.get(i).getUTC();
-            }
-        }
-        for (int i = 0; i < arr.size(); i++) {
-            if (set[i] == 0) {
-                double eta_i = Math.round(100 / (arr.get(i).getUTC() * z)) / 100.0;
-                if (arr.get(i).getE() > errorBound && eta_i > upper[i]) {
-                    eta_final[i] = upper[i];
-                    set[i] = 1;
-                    eta = eta - upper[i];
-                } else {
-                    eta_final[i] = eta_i;
-                    eta = eta - eta_i;
-                }
-            }
-        }
-        for (int i = 0; i < arr.size(); i++) {
-            if (set[i] == 0 && eta > 0) {
-                if (eta <= upper[i] - eta_final[i]) {
-                    eta_final[i] = eta_final[i] + eta;
-                    eta = 0;
-                } else {
-                    eta = eta - upper[i] + eta_final[i];
-                    eta_final[i] = upper[i];
-                }
-            }
-        }
-        return eta_final;
+
+
+    public static double[] dataReDistribution_EDFE(ArrayList<BaseStation> arr, double errorBound, double[] upper) {
+        return SingleQueryUtil.getDoubles(arr, errorBound, upper, Comparator.comparingDouble(BaseStation::getE));
     }
 
 
-    public static double[] dataReDistributionRandom(ArrayList<BaseStation> arr, double errorBound, double[] upper) {
-        int[] set = new int[arr.size()];
-        for (int i = 0; i < arr.size(); i++) {
-            set[i] = 0;
-        }
-        arr.sort(Comparator.comparingDouble(BaseStation::getLatitude));
-        for (int i = 0; i < arr.size(); i++) {
-            upper[i] = computeDataUpperBound(errorBound, arr, i);
-        }
-
-
-        double eta = 1;
-        double[] eta_final = new double[arr.size()];
-        double z = 0;
-        for (int i = 0; i < arr.size(); i++) {
-            if (set[i] == 0) {
-                z = z + 1 / arr.get(i).getUTC();
-            }
-        }
-        for (int i = 0; i < arr.size(); i++) {
-            if (set[i] == 0) {
-                double eta_i = Math.round(100 / (arr.get(i).getUTC() * z)) / 100.0;
-                if (arr.get(i).getE() > errorBound && eta_i > upper[i]) {
-                    eta_final[i] = upper[i];
-                    set[i] = 1;
-                    eta = eta - upper[i];
-                } else {
-                    eta_final[i] = eta_i;
-                    eta = eta - eta_i;
-                }
-            }
-        }
-        for (int i = 0; i < arr.size(); i++) {
-            if (set[i] == 0 && eta > 0) {
-                if (eta <= upper[i] - eta_final[i]) {
-                    eta_final[i] = eta_final[i] + eta;
-                    eta = 0;
-                } else {
-                    eta = eta - upper[i] + eta_final[i];
-                    eta_final[i] = upper[i];
-                }
-            }
-        }
-        return eta_final;
-    }
-
-    public static double computeDataUpperBound(double errorBound, ArrayList<BaseStation> arr, int i) {
-        double e_min = 1;
-        for (int j = 0; j < arr.size(); j++) {
-            if (e_min >= arr.get(j).getE() && j != i) {
-                e_min = arr.get(j).getE();
-            }
-        }
-        if (arr.get(i).getE() > errorBound) {
-            return Math.round((errorBound - e_min) * 100 / (arr.get(i).getE() - e_min)) / 100.0;
-        } else {
-            return 1;
-        }
+    public static double[] dataReDistribution_SDFE(ArrayList<BaseStation> arr, double errorBound, double[] upper) {
+        return SingleQueryUtil.getDoubles(arr, errorBound, upper, Comparator.comparingDouble(BaseStation::getLatitude));
     }
 
 
-    public static double[] dataReDistributionOEP(ArrayList<BaseStation> arr, double errorBound, double[] upper) {
-        int[] set = new int[arr.size()];
-        for (int i = 0; i < arr.size(); i++) {
-            set[i] = 0;
-        }
-        arr.sort(Comparator.comparingDouble(BaseStation::getLongitude));
-        for (int i = 0; i < arr.size(); i++) {
-            upper[i] = computeDataUpperBound(errorBound, arr, i);
-        }
-
-
-        double eta = 1;
-        double[] eta_final = new double[arr.size()];
-        double z = 0;
-        for (int i = 0; i < arr.size(); i++) {
-            if (set[i] == 0) {
-                z = z + 1 / arr.get(i).getUTC();
-            }
-        }
-        for (int i = 0; i < arr.size(); i++) {
-            if (set[i] == 0) {
-                double eta_i = Math.round(100 / (arr.get(i).getUTC() * z)) / 100.0;
-                if (arr.get(i).getE() > errorBound && eta_i > upper[i]) {
-                    eta_final[i] = upper[i];
-                    set[i] = 1;
-                    eta = eta - upper[i];
-                } else {
-                    eta_final[i] = eta_i;
-                    eta = eta - eta_i;
-                }
-            }
-        }
-        for (int i = 0; i < arr.size(); i++) {
-            if (set[i] == 0 && eta > 0) {
-                if (eta <= upper[i] - eta_final[i]) {
-                    eta_final[i] = eta_final[i] + eta;
-                    eta = 0;
-                } else {
-                    eta = eta - upper[i] + eta_final[i];
-                    eta_final[i] = upper[i];
-                }
-            }
-        }
-        return eta_final;
+    public static double[] dataReDistribution_NDFE(ArrayList<BaseStation> arr, double errorBound, double[] upper) {
+        return SingleQueryUtil.getDoubles(arr, errorBound, upper, Comparator.comparingDouble(BaseStation::getLongitude));
     }
+
+
 
     public static int[] run(BaseStation baseStation, int size, String csvFile, double phi, int start_time, double percent, int bound, int type, double upper) throws IOException {
         Runtime r = Runtime.getRuntime();

@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 import Config.config;
 
@@ -72,8 +73,7 @@ public class SingleQueryUtil {
                 int x_right = Integer.parseInt(country[4]);
                 int y_left = Integer.parseInt(country[5]);
                 int y_right = Integer.parseInt(country[6]);
-                double errorBound = Double.parseDouble(country[7]);
-                Query query = new Query(T, delta_T, x_left, x_right, y_left, y_right, errorBound, id);
+                Query query = new Query(T, delta_T, x_left, x_right, y_left, y_right, 0.01, id);
                 queries.add(query);
             }
         } catch (IOException e) {
@@ -155,6 +155,62 @@ public class SingleQueryUtil {
         }
     }
 
+    public static double[] getDoubles(ArrayList<BaseStation> arr, double errorBound, double[] upper, Comparator<BaseStation> baseStationComparator) {
+        int[] set = new int[arr.size()];
+        double eta = 1;
+        double[] eta_final = new double[arr.size()];
+        double z = 0;
+        arr.sort(baseStationComparator);
+        for (int i = 0; i < arr.size(); i++) {
+            upper[i] = computeDataUpperBound(errorBound, arr, i);
+        }
+        for (int i = 0; i < arr.size(); i++) {
+            if (set[i] == 0) {
+                z = z + 1 / arr.get(i).getUTC();
+            }
+        }
+        for (int i = 0; i < arr.size(); i++) {
+            if (set[i] == 0) {
+                double eta_i = Math.round(100 / (arr.get(i).getUTC() * z)) / 100.0;
+                if (arr.get(i).getE() > errorBound && eta_i > upper[i]) {
+                    eta_final[i] = upper[i];
+                    set[i] = 1;
+                    eta = eta - upper[i];
+                } else {
+                    eta_final[i] = eta_i;
+                    eta = eta - eta_i;
+                }
+            }
+        }
+        for (int i = 0; i < arr.size(); i++) {
+            if (set[i] == 0 && eta > 0) {
+                if (eta <= upper[i] - eta_final[i]) {
+                    eta_final[i] = eta_final[i] + eta;
+                    eta = 0;
+                } else {
+                    eta = eta - upper[i] + eta_final[i];
+                    eta_final[i] = upper[i];
+                }
+            }
+        }
+        relax_eta(arr,eta_final);
+        return eta_final;
+    }
+
+    public static double computeDataUpperBound(double errorBound, ArrayList<BaseStation> arr, int i) {
+        double e_min = 1;
+        for (int j = 0; j < arr.size(); j++) {
+            if (e_min >= arr.get(j).getE() && j != i) {
+                e_min = arr.get(j).getE();
+            }
+        }
+        if (arr.get(i).getE() > errorBound) {
+            return Math.round((errorBound - e_min) * 100 / (arr.get(i).getE() - e_min)) / 100.0;
+        } else {
+            return 1;
+        }
+    }
+
     public static void calculateIG(Query query, Cell cell, double y, int index, int N) {
         ArrayList<Integer> arrX = new ArrayList<>();
         ArrayList<Integer> arrY = new ArrayList<>();
@@ -186,6 +242,24 @@ public class SingleQueryUtil {
             cell.set.add(query);
         }
     }
+
+    public static void relax_eta(ArrayList<BaseStation> arr,double[]eta){
+        int index = 0;
+        double value = 1;
+        for (int i = 0;i < eta.length;i++){
+            if (arr.get(i).getE() < value){
+                value = arr.get(i).getE();
+                index = i;
+            }
+        }
+        for (int i = 0;i < eta.length;i++){
+            if (i != index && eta[i]>config.RelaxRate/10){
+                eta[i] -= config.RelaxRate/10;
+                eta[index] += config.RelaxRate/10;
+            }
+        }
+    }
+
 
 
     public static boolean calculate(Query query, BaseStation baseStation) {
