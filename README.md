@@ -24,7 +24,7 @@ A roadmap is here:
   - [How to Execute](#how-to-execute)
 - [Results and Findings](#results-and-findings)
   - [Studies on Individual Query Processing](#studies-on-individual-query-processing)
-  - [Studies on Individual Query Processing](#studies-on-concurrent-query-processing)
+  - [Studies on Concurrent Query Processing](#studies-on-concurrent-query-processing)
 - [Future Work](#future-work)
 - [Acknowledgements](#acknowledgements)
 - [Contributors](#contributors)
