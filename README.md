@@ -4,9 +4,8 @@
 <img src="https://img.shields.io/badge/version-0.2-blue" />
 <img src="https://img.shields.io/badge/java-%3E%3D12-blue" />
 <img src="https://img.shields.io/badge/code--size-74.1%20KB-yellowgreen" />
-<img src="https://img.shields.io/badge/data--size-500%20MB-yellowgreen" />
+<img src="https://img.shields.io/badge/data--size-48.5%20MB-yellowgreen" />
 </div>
-
 
 # Edge-Quantile-Queries
 
@@ -149,14 +148,14 @@ The configurable parameters are listed below.
      */
     public static String RelaxMethod = "minMax";
 
-    /* excute code on single machine or multiple machines 
-     Notice: if you want to excute code on multiple machines, make sure the following are done
-     (1) set useSocket to true
-     (2) set BaseStationFile = "./Resources/BaseStation/BaseStations_Socket.txt"
+    /* excute code on single machine or multiple machine 
+     !!! notice: if you want to excute code on multiple machine,you should do as follow:
+     (1) change useSocet = True
+     (2) change BaseStationFile = "./Resources/BaseStation/BaseStations_Socket.txt"
      (3) use default parameters for others
-     (3) configure your ip_address in "./Resources/BaseStation/BaseStations_Socket.txt"
-     (4) run ./src/Socket/Worker on every machine
-     (5) run ./src/Experiment/Entrance.java on one machine
+     (3) set the ip_address in "./Resources/BaseStation/BaseStations_Socket.txt"
+     (4) run  ./src/Socket/Worker on every machine
+     (5) run  ./src/Experiment/Entrance.java on one machine
      */
     public static boolean useSocket = false;
 ```
@@ -194,7 +193,8 @@ public class Entrance {
 }
 ```
 
-The console will output some intermediate results. The detailed results will be dumped to the files `/TestResultLog/SingleQueryTestResult.txt` and `/TestResultLog/ConcurrentQueryTestResult.txt`.
+The console will output some intermediate results. The detailed results will be dumped to the files 
+`/TestResultLog/SingleQueryTestResult.txt` and `/TestResultLog/ConcurrentQueryTestResult.txt`.
 
 ## Results and Findings
 
@@ -228,8 +228,7 @@ on reproducing our evaluations.
 We use other branches to control the simulation of
 base stations, mobility data, etc.
 
-Our programs support sockets for a distributed deployment.
-Still, we are making efforts on 
+We are making efforts on 
 integrating an RPC (Remote Call Procedure) Framework for real-world scenario 
 deployment.
 
