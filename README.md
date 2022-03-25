@@ -194,10 +194,7 @@ public class Entrance {
 }
 ```
 
-The console will output some intermediate results.
-The detailed results will be dumped to the files 
-`/TestResultLog/SingleQueryTestResult.txt` and 
-`/TestResultLog/ConcurrentQueryTestResult.txt`.
+The console will output some intermediate results. The detailed results will be dumped to the files `/TestResultLog/SingleQueryTestResult.txt` and `/TestResultLog/ConcurrentQueryTestResult.txt`.
 
 ## Results and Findings
 
