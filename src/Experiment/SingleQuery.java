@@ -80,7 +80,7 @@ public class SingleQuery {
             sumMem = sumMem + delay[1];
         }
 
-        BufferedWriter bw = new BufferedWriter(new FileWriter("FinalSingleTestResult.txt", true));
+        BufferedWriter bw = new BufferedWriter(new FileWriter("./TestResultLog/SingleQueryTestResult.txt", true));
         bw.write("\r\n");
         bw.write("TotalDelay = " + sum);
         bw.write("TotalMemory = " + sumMem);

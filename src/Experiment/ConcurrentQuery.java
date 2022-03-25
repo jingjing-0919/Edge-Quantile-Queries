@@ -125,7 +125,7 @@ public class ConcurrentQuery {
                 }
                 sumMem = sumMem + delay[1];
             }
-            BufferedWriter bw = new BufferedWriter(new FileWriter("./TestResultLog/SingleQueryTestResult.txt", true));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("./TestResultLog/ConcurrentQueryTestResult.txt", true));
             bw.write("\r\n");
             bw.write("TotalDelay = " + sum);
             bw.write("TotalMemory = " + sumMem);
@@ -194,7 +194,7 @@ public class ConcurrentQuery {
                     }
                 }
                 int sum = 0;
-                BufferedWriter bw = new BufferedWriter(new FileWriter("./src/TestResultLog/ConcurrentQueryTestResult.txt", true));
+                BufferedWriter bw = new BufferedWriter(new FileWriter("./TestResultLog/ConcurrentQueryTestResult.txt", true));
                 for (Query query : queries) {
                     ArrayList<Cell> grids1 = query.covered;
                     int delay = 0;

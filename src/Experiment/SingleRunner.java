@@ -62,7 +62,7 @@ public class SingleRunner {
                 throw new IllegalStateException("Unexpected value: " + config.Method);
         }
 
-        BufferedWriter bw = new BufferedWriter(new FileWriter("TestResultLog/SingleQueryTestResult.txt", true));
+        BufferedWriter bw = new BufferedWriter(new FileWriter("./TestResultLog/SingleQueryTestResult.txt", true));
         bw.write("\r\n");
         bw.write("-------------------------------------------------------------------------------------------");
         bw.write("\r\n");
@@ -107,7 +107,7 @@ public class SingleRunner {
         for (int i = 0; i < arr.size(); i++) {
             errorRate = errorRate + eta[i] * arr.get(i).getE();
         }
-        BufferedWriter bw = new BufferedWriter(new FileWriter("TestResultLog/SingleQueryTestResult.txt", true));
+        BufferedWriter bw = new BufferedWriter(new FileWriter("./TestResultLog/SingleQueryTestResult.txt", true));
         bw.write("\r\n");
         bw.write("ErrorRate: " + errorRate);
         bw.write("\r\n");
@@ -198,7 +198,7 @@ public class SingleRunner {
         r.gc();
         long start_total = r.totalMemory();
         long start_free = r.freeMemory();
-        BufferedWriter bw = new BufferedWriter(new FileWriter("TestResultLog/SingleQueryTestResult.txt", true));
+        BufferedWriter bw = new BufferedWriter(new FileWriter("./TestResultLog/SingleQueryTestResult.txt", true));
         double e = baseStation.getE();
 
 

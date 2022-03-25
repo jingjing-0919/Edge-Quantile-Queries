@@ -199,19 +199,6 @@ The detailed results will be dumped to the files
 `/TestResultLog/SingleQueryTestResult.txt` and 
 `/TestResultLog/ConcurrentQueryTestResult.txt`.
 
-A sample is given below:
-```text
-Time cost of dataRedistribution: 90 ms
- 
-
-GridID: 0
-Model.BaseStation id: 1
-dataSize: 1000000
-GK  cost: 1825ms error: 0.05
-
-...
-```
-
 ## Results and Findings
 
 Below we showcase some experimental results we obtained from the code implementation.
