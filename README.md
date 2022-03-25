@@ -110,6 +110,13 @@ The configurable parameters are listed below.
     /* the number of base stations:
        "./Resources/BaseStation/BaseStations[16|24|32].txt"
     */
+
+    public static String DataFile = "./Resources/Data/SyntheticData/synthetic_data_sample_2m.txt";
+    /*
+        "./Resources/Data/SyntheticData/synthetic_data_sample_2m.txt" for ConcurrentQuery
+        "./Resources/Data/SyntheticData/synthetic_data_sample_25m.txt" for SingleQuery
+     */
+
     public static String BaseStationFile = "./Resources/BaseStation/BaseStations16.txt";
     
     /* the number of base stations:
