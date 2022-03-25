@@ -4,7 +4,7 @@
 <img src="https://img.shields.io/badge/version-0.2-blue" />
 <img src="https://img.shields.io/badge/java-%3E%3D12-blue" />
 <img src="https://img.shields.io/badge/code--size-74.1%20KB-yellowgreen" />
-<img src="https://img.shields.io/badge/data--size-48.5%20MB-yellowgreen" />
+<img src="https://img.shields.io/badge/data--size-486%20MB-yellowgreen" />
 </div>
 
 # Edge-Quantile-Queries
@@ -18,6 +18,7 @@ reproducing of our paper entitled
 A roadmap is here:
 - [Get Started](#get-started)
   - [Prerequisites and Dependencies](#prerequisites-and-dependencies)
+  - [Dataset Download](#dataset-download)
   - [Project Structure](#project-structure)
   - [How to Configure](#how-to-configure)
   - [How to Execute](#how-to-execute)
@@ -38,6 +39,11 @@ The code is implemented in Java 12, without external libraries used.
 The code implementation should be executable on all platforms for which there exists a JVM (>=12).
 
 It is suggested to import the project to the IntelliJ IDEA (or other alternative Java IDEs) and run the code from the console.
+
+### Dataset Download
+
+The [Git Large File Storage (LFS)](https://git-lfs.github.com/) may restrict your dataset download due to bandwidth limit. 
+Please feel free to contact us if you met the above issue.
 
 ### Project Structure
 
