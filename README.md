@@ -42,7 +42,7 @@ It is suggested to import the project to the IntelliJ IDEA (or other alternative
 
 ### Dataset Download
 
-The [Git Large File Storage (LFS)](https://git-lfs.github.com/) may restrict your dataset download due to bandwidth limit. 
+The [Git Large File Storage (LFS)](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-storage-and-bandwidth-usage) may restrict your dataset download due to the bandwidth limit. 
 Please feel free to contact us if you met the above issue.
 
 ### Project Structure
