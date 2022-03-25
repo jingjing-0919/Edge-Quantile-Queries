@@ -6,15 +6,101 @@ import Model.Cell;
 import Model.Query;
 import Experiment.ConcurrentRunner;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 
+import static Util.SingleQueryUtil.x_length;
+import static Util.SingleQueryUtil.y_length;
+
 public class ConcurrentQueryUtil {
+    public static void initBaseStation(ArrayList<BaseStation> baseStations) {
+        String csvFile = config.BaseStationFile;
+        BufferedReader br = null;
+        String line = "";
+        String cvsSplitBy = ",";
+        try {
+            br = new BufferedReader(new FileReader(csvFile));
+            while ((line = br.readLine()) != null) {
+                // use comma as separator
+                String[] country = line.split(cvsSplitBy);
+                int id = Integer.parseInt(country[0]);
+                double e = Double.parseDouble(country[1]);
+                double UTC = Double.parseDouble(country[2]);
+                int delay = Integer.parseInt(country[3]);
+                int longitude = Integer.parseInt(country[4]);
+                int latitude = Integer.parseInt(country[5]);
+                int radius = Integer.parseInt(country[6]);
+                BaseStation baseStation = new BaseStation(e, UTC, id, delay, longitude, latitude, radius);
+                if (config.useSocket) {
+                    baseStation.setIpAddress(country[7]);
+                }
+                baseStations.add(baseStation);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    public static void initCell(ArrayList<Cell> cells) {
+        int Cell_length = config.Cell_length;
+        int numberOfGrid_x = x_length / Cell_length;
+        int numberOfGrid_y = y_length / Cell_length;
+        int count = 0;
+        for (int i = 0; i < numberOfGrid_y; i++) {
+            for (int j = 0; j < numberOfGrid_x; j++) {
+                Cell cell = new Cell(j * Cell_length, (j + 1) * Cell_length, i * Cell_length, (i + 1) * Cell_length, count);
+                cells.add(cell);
+                count++;
+            }
+        }
+    }
+
+    public static void initQuery(ArrayList<Query> queries) {
+        BufferedReader br = null;
+        String line = "";
+        String cvsSplitBy = ",";
+        String csvFile = config.QueryFile;
+        try {
+            br = new BufferedReader(new FileReader(csvFile));
+            while ((line = br.readLine()) !=
+
+                    null) {
+                // use comma as separator
+                String[] country = line.split(cvsSplitBy);
+                int id = Integer.parseInt(country[0]);
+                int T = Integer.parseInt(country[1]);
+                int delta_T = Integer.parseInt(country[2]);
+                int x_left = Integer.parseInt(country[3]);
+                int x_right = Integer.parseInt(country[4]);
+                int y_left = Integer.parseInt(country[5]);
+                int y_right = Integer.parseInt(country[6]);
+                double errorBound = Double.parseDouble(country[7]);
+                Query query = new Query(T, delta_T, x_left, x_right, y_left, y_right, errorBound, id);
+                queries.add(query);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
     public static ArrayList<Integer> execute(Cell cell, int id, ArrayList<BaseStation> arr, HashMap<BaseStation, Double> eta, int dataSize, String csvFile1) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter("./TestResultLog/ConcurrentQueryTestResult.txt", true));
         bw.write(" \r\n");

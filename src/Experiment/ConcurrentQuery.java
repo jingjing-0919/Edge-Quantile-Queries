@@ -22,16 +22,16 @@ public class ConcurrentQuery {
 
         //initial BaseStations
         ArrayList<BaseStation> baseStations = new ArrayList<>();
-        SingleQueryUtil.initBaseStation(baseStations);
+        ConcurrentQueryUtil.initBaseStation(baseStations);
 
         //initial Queries
         ArrayList<Query> queries = new ArrayList<>();
-        SingleQueryUtil.initQuery(queries);
+        ConcurrentQueryUtil.initQuery(queries);
 
         //initial Grids
 
         ArrayList<Cell> cells = new ArrayList<>();
-        SingleQueryUtil.initCell(cells);
+        ConcurrentQueryUtil.initCell(cells);
 
         //find all relative BaseStations for  cells
         for (Cell cell : cells) {
@@ -176,7 +176,7 @@ public class ConcurrentQuery {
             long end = System.nanoTime();
             //System.out.println("start:"+start);
             //System.out.println("end:"+end);
-            BufferedWriter bw1 = new BufferedWriter(new FileWriter("./src/TestResultLog/ConcurrentQueryTestResult.txt", true));
+            BufferedWriter bw1 = new BufferedWriter(new FileWriter("./TestResultLog/ConcurrentQueryTestResult.txt", true));
             bw1.write("Time cost of dataRedistribution: " + (end - start) / 1000000 + " ms\n");
             bw1.close();
             long sumMem = 0;
